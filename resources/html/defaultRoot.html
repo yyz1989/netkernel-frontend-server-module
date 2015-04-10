@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <title>KBO as linked open data</title>
+        <style type="text/css">
+            @import url(/css/page.css);
+            @import url(/css/documentation.css);
+            @import url(/css/explorer.css);
+            @import url(/css/responsive.css);
+            @import url(/css/print.css);
+   	    </style>
+        <link rel="shortcut icon" href="/img/favicon.png"/>
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="/"><span>KBO DATA</span></a>
+            </div>
+        </div>
+        <div id="content">
+            <h1>KBO as Linked Open Data</h1>
+            
+            <h2>KBO</h2>
+
+            <p>The Crossroads Bank for Enterprises (BCE/KBO) is a register containing comprehensive identification data related to businesses and their ‘establishment units’ (i.e. business locations). It includes data from the national register of legal entities, the trade register and VAT and NSSO information.
+            More info: <a href="http://economie.fgov.be/en/">KBO</a></p>
+
+            <h2>KBO as Open Data</h2>
+            <p>Starting from May 9th 2014, the KBO data will become available as Open Data: data which can be freely reused.</p>
+
+            <h2>KBO as Linked Open Data</h2>
+            <p>This site aims to be a showcase how Open Data can be published according to the <a href="/kbo_linked_data_info.html">Linked Open Data</a> publishing principles and best practices.</p>
+
+            <h2>Explore the dataset</h2>
+            <div id="explorer">
+                <div class="api active" data-api="lookup">
+                    <h4>Lookup a resource by its identifier</h4>
+                    <div class="form-area">
+                        <form action="#" method="GET">
+                            <input name="identifier" type="text" placeholder="Enter an identifier" />
+                            <select class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <div class="buttons">
+                                <button type="submit">Lookup identifier</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="api" data-api="search">
+                    <h4>Search by keyword</h4>
+                    <div class="form-area">
+                        <form action="#" method="GET">
+                            <input name="keyword" type="text" placeholder="Enter a keyword" />
+                            <select class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <div class="buttons">
+                                <button type="submit">Search keyword</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="api" data-api="sparql">
+                    <h4>Search with a query (<a href="http://www.w3.org/TR/sparql11-query/">SPARQL</a>)</h4>
+                    <div class="form-area">
+                        <form action="#" method="GET">
+                            <textarea name="query" placeholder="Enter a SPARQL query"></textarea>
+                            <select class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <div class="buttons">
+                                <button type="submit">Run Query</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="api" data-api="reconciliation">
+                    <h4>Retrieve identifiers for a label (<a href="https://github.com/OpenRefine/OpenRefine/wiki/Reconciliation-Service-Api">Reconciliation Service API</a>)</h4>
+                    <div class="form-area">
+                        <form action="#" method="GET">
+                            <input name="label" type="text" placeholder="Enter a label" />
+                            <select class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <div class="buttons">
+                                <button type="submit">Reconcile labels</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="api" data-api="fragments">
+                    <h4>Request a fragment (<a href="http://linkeddatafragments.org/">Linked Data Fragments</a>)</h4>
+                    <div class="form-area">
+                        <form action="#" method="GET">
+                            <input name="rdfsubject" type="text" placeholder="Enter a subject"/>
+                            <select id="samplessubject" class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <input name="rdfpredicate" type="text" placeholder="Enter a predicate"/>
+                            <select id="samplespredicate" class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <input name="rdfobject" type="text" placeholder="Enter an object"/>
+                            <select id="samplesobject" class="samples" size="1">
+                                <option value="">Examples...</option>
+                            </select>
+                            <div class="buttons">
+                                <button type="submit">Find matching triples</button>
+                                <button type="reset">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div>
+                <span class="copyright">
+                    <span>&copy; 2014</span>
+                    <a class="proxml" href="http://www.proxml.be"><span>ProXML</span></a>
+                    <a class="elephantbird" href="http://netkernelbook.org"><span>Elephant Bird Consulting</span></a>
+                </span>
+                <span class="powered-by">
+                    <a class="netkernel" href="http://www.1060research.com"><span>NetKernel</span></a>
+                    <a class="stardog" href="http://stardog.com"><span>Stardog</span></a>
+                </span>
+            </div>
+        </div>
+        <script type="text/javascript" src="/lib/jquery/jquery-1.11.0.min.js"></script>      
+        <script type="text/javascript" src="/config/kbodata-config.js"></script>      
+        <script type="text/javascript" src="/js/kbodata-explorer.js"></script>      
+    </body>
+</html>

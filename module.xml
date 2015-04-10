@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:be:proxml:lodvl:server</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>LODVL Server Module</name>
+      <description>The module for Linked Open Data Flanders frontend server</description>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+  </system>
+
+<rootspace
+name="LODVL Server Module - Services"
+public="true"
+uri="urn:be:proxml:lodvl:server:services">
+
+<literal type="xml" uri="res:/etc/system/SimpleDynamicImportHook.xml">
+<connection>
+<type>LODVLFulcrum</type>
+</connection>
+</literal>
+
+<fileset>
+  <regex>res:/css/(.*)</regex>
+  <rewrite>res:/resources/ux/css/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/lib/(.*)</regex>
+  <rewrite>res:/resources/ux/lib/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/fonts/(.*)</regex>
+  <rewrite>res:/resources/ux/fonts/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/js/(.*)</regex>
+  <rewrite>res:/resources/ux/js/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/img/(.*)</regex>
+  <rewrite>res:/resources/ux/img/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/config/(.*)</regex>
+  <rewrite>res:/resources/ux/config/$1</rewrite>
+</fileset>
+
+<fileset>
+  <regex>res:/resources/gif/.*\.gif</regex>
+</fileset>
+
+<endpoint>
+  <prototype>Limiter</prototype>
+  <grammar>res:/etc/
+  <regex type="anything"/>
+  </grammar>
+</endpoint>
+
+
+
+</rootspace>
+</module>
