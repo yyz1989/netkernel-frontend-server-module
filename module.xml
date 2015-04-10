@@ -67,7 +67,82 @@ uri="urn:be:proxml:lodvl:server:services">
   </grammar>
 </endpoint>
 
-
-
+<overlay>
+  <prototype>RESTOverlay</prototype>
+  <config>
+    <basepath>/</basepath>
+    <auto404/>
+  </config>
+  <space>
+    <mapper>
+      <config>
+        <endpoint>
+          <meta>
+            <rest>
+              <simple></simple>
+              <method>GET</method>
+              <Etag>MD5</Etag>
+              <compress/>
+            </rest>
+          </meta>
+          <grammar>
+            <active>
+              <identifier>active:lodvlHome</identifier>
+            </active>
+          </grammar>
+          <request>
+            <identifier>res:/resources/html/defaultRoot.html</identifier>
+          </request>
+        </endpoint>
+ <endpoint>
+          <meta>
+            <rest>
+              <simple>{dataset}/{id}</simple>
+              <method>GET</method>
+              <Etag>MD5</Etag>
+              <compress/>
+            </rest>
+          </meta>
+          <grammar>
+            <active>
+              <identifier>active:dsByIdFromRest</identifier>
+              <argument name="dataset"/>
+              <argument name="id"/>
+            </active>
+          </grammar>
+          <request>
+            <identifier>active:dsById</identifier>
+            <argument name="dataset" method="as-string">[[arg:dataset]]</argument>
+            <argument name="id" method="as-string">[[arg:id]]</argument>
+          </request>
+        </endpoint>
+        <endpoint>
+          <meta>
+            <rest>
+              <simple>{dataset}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+              <method>GET</method>
+              <Etag>MD5</Etag>
+              <compress/>
+            </rest>
+          </meta>
+          <grammar>
+            <active>
+              <identifier>active:dsByIdAndExtFromRest</identifier>
+              <argument name="dataset"/>
+              <argument name="id"/>
+              <argument name="extension"/>
+            </active>
+          </grammar>
+          <request>
+            <identifier>active:dsById</identifier>
+            <argument name="dataset" method="as-string">[[arg:dataset]]</argument>
+            <argument name="id" method="as-string">[[arg:id]]</argument>
+            <argument name="extension" method="as-string">[[arg:extension]]</argument>
+          </request>
+        </endpoint>
+      </config>
+    </mapper>
+  </space>
+</overlay>
 </rootspace>
 </module>
