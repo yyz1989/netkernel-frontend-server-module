@@ -1,148 +1,676 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="2.0">
-  <meta>
-    <identity>
-      <uri>urn:be:proxml:lodvl:server</uri>
-      <version>1.0.0</version>
-    </identity>
-    <info>
-      <name>LODVL Server Module</name>
-      <description>The module for Linked Open Data Flanders frontend server</description>
-    </info>
-  </meta>
+	<meta>
+		<identity>
+			<uri>urn:be:proxml:lodvl:server</uri>
+			<version>1.0.0</version>
+		</identity>
+		<info>
+			<name>LODVL Server Module</name>
+			<description>The module for Linked Open Data Flanders frontend server</description>
+		</info>
+	</meta>
 
-  <system>
-    <dynamic/>
-  </system>
+	<system>
+		<dynamic/>
+	</system>
 
-<rootspace
-name="LODVL Server Module - Services"
-public="true"
-uri="urn:be:proxml:lodvl:server:services">
 
-<literal type="xml" uri="res:/etc/system/SimpleDynamicImportHook.xml">
-<connection>
-<type>LODVLFulcrum</type>
-</connection>
-</literal>
+	<rootspace 
+		name="LODVL Server Module - Services"
+		public="true"
+		uri="urn:be:proxml:lodvl:server:services">		
+        <literal type="xml" uri="res:/etc/system/SimpleDynamicImportHook.xml">
+			<connection>
+				<type>LODVLFulcrum</type>
+			</connection>
+        </literal>
+        
+        <fileset>
+        	<regex>res:/css/(.*)</regex>
+        	<rewrite>res:/resources/ux/css/$1</rewrite>
+        </fileset>
 
-<fileset>
-  <regex>res:/css/(.*)</regex>
-  <rewrite>res:/resources/ux/css/$1</rewrite>
-</fileset>
+        <fileset>
+        	<regex>res:/lib/(.*)</regex>
+        	<rewrite>res:/resources/ux/lib/$1</rewrite>
+        </fileset>
+        
+        <fileset>
+        	<regex>res:/fonts/(.*)</regex>
+        	<rewrite>res:/resources/ux/fonts/$1</rewrite>
+        </fileset>
 
-<fileset>
-  <regex>res:/lib/(.*)</regex>
-  <rewrite>res:/resources/ux/lib/$1</rewrite>
-</fileset>
+        <fileset>
+        	<regex>res:/js/(.*)</regex>
+        	<rewrite>res:/resources/ux/js/$1</rewrite>
+        </fileset>
+        
+        <fileset>
+        	<regex>res:/img/(.*)</regex>
+        	<rewrite>res:/resources/ux/img/$1</rewrite>
+        </fileset>
+        
+        <fileset>
+        	<regex>res:/config/(.*)</regex>
+        	<rewrite>res:/resources/ux/config/$1</rewrite>
+        </fileset>
+        
+		<fileset>
+			<regex>res:/resources/gif/.*\.gif</regex>
+		</fileset>
+		        
+		<endpoint>
+			<prototype>Limiter</prototype>
+			<grammar>res:/etc/
+				<regex type="anything"/>
+			</grammar>
+		</endpoint>
+        
+		<overlay>
+			<prototype>RESTOverlay</prototype>
+			<config>
+				<basepath>/</basepath>
+				<auto404/>
+			</config>
+			<space>
+				<mapper>
+					<config>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple></simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatahome</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>res:/resources/html/defaultRoot.html</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>kbo_linked_data_technical_info.html</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatatechnical</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>res:/resources/html/kbo_linked_data_technical_info.html</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>kbo_linked_data_info.html</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatainfo</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>res:/resources/html/kbo_linked_data_info.html</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>reconcile</simple>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatareconcilerestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatareconcile</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>keywordsearch</simple>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatarekeywordsearchrestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatakeywordsearch</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>fragments</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatastardogfragmentsrestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatafragments</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>sparql</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatastardogsparqlrestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatasparql</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>download/kbo.zip</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatadownload</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>file:/var/opt/stardog/data/kbo.zip</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>robots.txt</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatarobots</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>res:/resources/txt/robots.txt</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>dataset/kbo.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatavoidwithextensionrestoverlay</identifier>
+									<argument name="extension"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatavoid</identifier>
+								<argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>dataset/kbo</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatavoidrestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatavoid</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>def.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatadefwithextensionrestoverlay</identifier>
+									<argument name="extension"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatadef</identifier>
+								<argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>def</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatadefrestoverlay</identifier>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatadef</identifier>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>{owner:(address|conceptscheme|organisation)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabyidwithextensionrestoverlay</identifier>
+									<argument name="owner"/>
+									<argument name="id"/>
+									<argument name="extension"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyid</identifier>
+								<argument name="owner" method="as-string">[[arg:owner]]</argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+								<argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>{owner:(activity|activitygroup|classification|contacttype|entitycontact|juridicalform|juridicalsituation|language|nace2003|nace2008|status|typeofaddress|typeofdenomination|typeofenterprise)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabyidlimitedwithextensionrestoverlay</identifier>
+									<argument name="owner"/>
+									<argument name="id"/>
+									<argument name="extension"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyidlimited</identifier>
+								<argument name="owner" method="as-string">[[arg:owner]]</argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+								<argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>{owner:(address|conceptscheme|organisation)}/{id}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabyidrestoverlay</identifier>
+									<argument name="owner"/>
+									<argument name="id"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyid</identifier>
+								<argument name="owner" method="as-string">[[arg:owner]]</argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+							</request>
+						</endpoint>
+						<endpoint>
+							<meta>
+								<rest>
+									<simple>{owner:(activity|activitygroup|classification|contacttype|entitycontact|juridicalform|juridicalsituation|language|nace2003|nace2008|status|typeofaddress|typeofdenomination|typeofenterprise)}/{id}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabyidlimitedrestoverlay</identifier>
+									<argument name="owner"/>
+									<argument name="id"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyidlimited</identifier>
+								<argument name="owner" method="as-string">[[arg:owner]]</argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+							</request>
+						</endpoint>
+					</config>
+					<space>
+						<import>
+							<uri>urn:be:proxml:lodvl:server:import</uri>
+							<private/>
+						</import>
+					</space>
+				</mapper>
+			</space>
+		</overlay>
+		
+		<import>
+			<!-- RESTOverlay -->
+			<uri>urn:org:netkernel:tpt:http</uri>
+		</import>
+		
+		<import>
+			<!-- Limiter -->
+			<uri>urn:org:netkernel:ext:layer1</uri>
+		</import>
+	</rootspace>
 
-<fileset>
-  <regex>res:/fonts/(.*)</regex>
-  <rewrite>res:/resources/ux/fonts/$1</rewrite>
-</fileset>
 
-<fileset>
-  <regex>res:/js/(.*)</regex>
-  <rewrite>res:/resources/ux/js/$1</rewrite>
-</fileset>
+	<rootspace 
+		name="LODVL Server Module - Import" 
+		public="false"
+		uri="urn:be:proxml:lodvl:server:import">
 
-<fileset>
-  <regex>res:/img/(.*)</regex>
-  <rewrite>res:/resources/ux/img/$1</rewrite>
-</fileset>
+		<overlay>
+			<prototype>layer1.Concurrency.Throttle</prototype>
+			<config>
+				<concurrency>4</concurrency>
+				<queue>100</queue>
+			</config>
+			<space>
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatabyid</identifier>
+							<argument name="owner" desc="owner" max="1" min="1"/>				
+							<argument name="id" desc="id" max="1" min="1"/>				
+							<argument name="extension" desc="extension" max="1" min="0"/>				
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatabyid.groovy</script>
+				</accessor>
+				
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatabyidlimited</identifier>
+							<argument name="owner" desc="owner" max="1" min="1"/>				
+							<argument name="id" desc="id" max="1" min="1"/>				
+							<argument name="extension" desc="extension" max="1" min="0"/>				
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatabyidlimited.groovy</script>
+				</accessor>
 
-<fileset>
-  <regex>res:/config/(.*)</regex>
-  <rewrite>res:/resources/ux/config/$1</rewrite>
-</fileset>
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatadef</identifier>			
+							<argument name="extension" desc="extension" max="1" min="0"/>				
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatadef.groovy</script>
+				</accessor>
+		
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatavoid</identifier>			
+							<argument name="extension" desc="extension" max="1" min="0"/>				
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatavoid.groovy</script>
+				</accessor>
+				
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatakeywordsearch</identifier>			
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatakeywordsearch.groovy</script>
+				</accessor>
+			</space>
+		</overlay>
 
-<fileset>
-  <regex>res:/resources/gif/.*\.gif</regex>
-</fileset>
+		<overlay>
+			<prototype>layer1.Concurrency.Throttle</prototype>
+			<config>
+				<concurrency>2</concurrency>
+				<queue>50</queue>
+			</config>
+			<space>
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatareconcile</identifier>			
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatareconcile.groovy</script>
+				</accessor>
+			</space>
+		</overlay>
+		
+		<overlay>
+			<prototype>layer1.Concurrency.Throttle</prototype>
+			<config>
+				<concurrency>2</concurrency>
+				<queue>50</queue>
+			</config>
+			<space>
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatasparql</identifier>			
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatasparql.groovy</script>
+				</accessor>
+			</space>
+		</overlay>
+		
+		<overlay>
+			<prototype>layer1.Concurrency.Throttle</prototype>
+			<config>
+				<concurrency>4</concurrency>
+				<queue>50</queue>
+			</config>
+			<space>
+				<accessor>
+					<grammar>
+						<active>
+							<identifier>active:kbodatafragments</identifier>			
+						</active>
+					</grammar>
+					<prototype>GroovyPrototype</prototype>
+					<script>res:/resources/groovy/kbodatafragments.groovy</script>
+				</accessor>
+			</space>
+		</overlay>
 
-<endpoint>
-  <prototype>Limiter</prototype>
-  <grammar>res:/etc/
-  <regex type="anything"/>
-  </grammar>
-</endpoint>
+		<fileset>
+			<regex>res:/resources/groovy/.*</regex>
+		</fileset>
+		
+		<fileset>
+			<regex>res:/resources/freemarker/.*</regex>
+		</fileset>
+		
+		<fileset>
+			<regex>res:/resources/json/.*</regex>
+		</fileset>
 
-<overlay>
-  <prototype>RESTOverlay</prototype>
-  <config>
-    <basepath>/</basepath>
-    <auto404/>
-  </config>
-  <space>
-    <mapper>
-      <config>
-        <endpoint>
-          <meta>
-            <rest>
-              <simple></simple>
-              <method>GET</method>
-              <Etag>MD5</Etag>
-              <compress/>
-            </rest>
-          </meta>
-          <grammar>
-            <active>
-              <identifier>active:lodvlHome</identifier>
-            </active>
-          </grammar>
-          <request>
-            <identifier>res:/resources/html/defaultRoot.html</identifier>
-          </request>
-        </endpoint>
- <endpoint>
-          <meta>
-            <rest>
-              <simple>{dataset}/{id}</simple>
-              <method>GET</method>
-              <Etag>MD5</Etag>
-              <compress/>
-            </rest>
-          </meta>
-          <grammar>
-            <active>
-              <identifier>active:dsByIdFromRest</identifier>
-              <argument name="dataset"/>
-              <argument name="id"/>
-            </active>
-          </grammar>
-          <request>
-            <identifier>active:dsById</identifier>
-            <argument name="dataset" method="as-string">[[arg:dataset]]</argument>
-            <argument name="id" method="as-string">[[arg:id]]</argument>
-          </request>
-        </endpoint>
-        <endpoint>
-          <meta>
-            <rest>
-              <simple>{dataset}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
-              <method>GET</method>
-              <Etag>MD5</Etag>
-              <compress/>
-            </rest>
-          </meta>
-          <grammar>
-            <active>
-              <identifier>active:dsByIdAndExtFromRest</identifier>
-              <argument name="dataset"/>
-              <argument name="id"/>
-              <argument name="extension"/>
-            </active>
-          </grammar>
-          <request>
-            <identifier>active:dsById</identifier>
-            <argument name="dataset" method="as-string">[[arg:dataset]]</argument>
-            <argument name="id" method="as-string">[[arg:id]]</argument>
-            <argument name="extension" method="as-string">[[arg:extension]]</argument>
-          </request>
-        </endpoint>
-      </config>
-    </mapper>
-  </space>
-</overlay>
-</rootspace>
+		<fileset>
+			<regex>res:/resources/xsl/.*</regex>
+		</fileset>
+
+		<fileset>
+			<regex>res:/resources/html/.*</regex>
+		</fileset>
+
+		<fileset>
+			<regex>res:/resources/sparql/.*</regex>
+		</fileset>
+
+		<fileset>
+			<regex>res:/resources/txt/.*</regex>
+		</fileset>
+		
+		<import>
+			<!-- GroovyPrototype -->
+			<uri>urn:org:netkernel:lang:groovy</uri>
+		</import>
+		
+		<import>
+			<!-- active:freemarker -->
+			<uri>urn:org:netkernel:lang:freemarker</uri>
+		</import>
+
+		<import>
+			<!-- active:jRDFParseXML, active:active:jRDFSerializeXXXXXX -->
+			<uri>urn:org:netkernel:rdf:jena</uri>
+		</import>
+		
+		<import>
+			<!-- JSONObject -->
+			<uri>urn:org:netkernel:json:core</uri>
+		</import>
+
+		<import>
+			<!-- active:xslt -->
+			<uri>urn:org:netkernel:xml:core</uri>
+		</import>
+
+		<import>
+			<!-- active:xslt2 -->
+			<uri>urn:org:netkernel:xml:saxon</uri>
+		</import>		
+		
+		<import>
+			<!-- file:/ scheme -->
+			<uri>urn:org:netkernel:ext:layer1</uri>
+		</import>
+		
+		<import>
+			<!-- httpRequest:/ scheme -->
+			<uri>urn:org:netkernel:tpt:http</uri>
+		</import>
+		
+		<literal type="xml" uri="res:/etc/pdsConfig.xml">
+			<config>
+				<zone>LODVLFulcrum</zone>
+			</config>
+		</literal>
+		
+		<literal type="string" uri="kbodata:dataset">http://data.kbodata.be/dataset/kbo#id</literal>
+		
+		<import>
+			<!-- pds:/ scheme -->
+			<uri>urn:org:netkernel:mod:pds</uri>
+		</import>
+
+		<import>
+			<!-- pds backend -->
+			<uri>urn:org:netkernel:mod:pds:rdbms:local</uri>
+		</import>
+
+		<import>
+			<!-- contains active:md5 -->
+			<uri>urn:org:netkernel:mod:security</uri>
+		</import>
+		
+		<import>
+			<!-- kbodata literals -->
+			<uri>urn:com:elbeesee:kbodata:stardog</uri>
+			<version-min>1.0.0</version-min>
+		</import>
+		<import>
+			<!-- active:sparql -->
+			<uri>urn:com:elbeesee:triplestore:httpclient:sparql</uri>
+			<version-min>1.6.0</version-min>
+		</import>
+		<import>
+			<!-- active:fragments -->
+			<uri>urn:com:elbeesee:triplestore:httpclient:fragments</uri>
+			<version-min>1.6.0</version-min>
+		</import>
+		<import>
+			<!-- active:reconcile -->
+			<uri>urn:com:elbeesee:triplestore:httpclient:reconcile:larq</uri>
+			<version-min>1.6.0</version-min>
+		</import>
+		<import>
+			<!-- active:keywordsearch -->
+			<uri>urn:com:elbeesee:triplestore:httpclient:kws:larq</uri>
+			<version-min>1.6.0</version-min>
+		</import>
+	</rootspace>
 </module>
