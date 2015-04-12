@@ -363,7 +363,7 @@
 						<endpoint>
 							<meta>
 								<rest>
-									<simple>{owner:(address|conceptscheme|organisation)}/{id}</simple>
+									<simple>{owner:(dataset|licentie|organisatie)}/{id}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
@@ -583,6 +583,10 @@
 		<fileset>
 			<regex>res:/resources/txt/.*</regex>
 		</fileset>
+
+                <import>
+                  <uri>urn:be:proxml:module:sparql</uri>
+                </import>
 		
 		<import>
 			<!-- GroovyPrototype -->
