@@ -12,7 +12,7 @@
 import org.netkernel.layer0.nkf.*;
 import org.netkernel.layer0.representation.*
 import org.netkernel.layer0.representation.impl.*;
-
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 /**
  * Processing Imports.
@@ -117,12 +117,14 @@ else {
 	freemarkerrequest.setRepresentationClass(String.class);
 	String vQuery = (String)aContext.issueRequest(freemarkerrequest);
 		
-	INKFRequest sparqlrequest = aContext.createRequest("active:sparql");
-	sparqlrequest.addArgument("database", "kbodata:database");
-	sparqlrequest.addArgument("expiry", "kbodata:expiry");
-	sparqlrequest.addArgument("credentials", "kbodata:credentials");
-	sparqlrequest.addArgumentByValue("query", vQuery);
-	sparqlrequest.addArgumentByValue("accept", "application/rdf+xml");
+	INKFRequest sparqlrequest = aContext.createRequest("active:httpPost");
+	HDSBuilder body = new HDSBuilder();
+	body.pushNode("query", vQuery);
+	sparqlrequest.addArgumentByValue("nvp", body.getRoot());
+	sparqlrequest.addArgumentByValue("url", "http://localhost:8083/module/sparql/query");
+	HDSBuilder newHeaders = new HDSBuilder();
+	newHeaders.addNode("Accept", "application/rdf+xml");
+	sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
 	vSparqlResult = aContext.issueRequest(sparqlrequest);
 	
 	aContext.sink("pds:/" +aOwner + "_" + aID, vSparqlResult);
