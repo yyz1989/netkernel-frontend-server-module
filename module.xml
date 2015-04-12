@@ -315,7 +315,7 @@
 						<endpoint>
 							<meta>
 								<rest>
-									<simple>{owner:(address|conceptscheme|organisation)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<simple>{owner:(dataset|licentie|organisatie)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
