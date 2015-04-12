@@ -237,6 +237,11 @@
 						</xsl:choose>
 					</h1>
 					<div class="properties">
+<xsl:if test="dct:identifier">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:identifier"/>
+</xsl:call-template>
+</xsl:if>
 						<xsl:if test="skos:prefLabel">
 							<xsl:call-template name="tablerow">
 								<xsl:with-param name="key" select="skos:prefLabel[1]"/>
