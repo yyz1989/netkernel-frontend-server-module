@@ -585,7 +585,7 @@
 		</fileset>
 
                 <import>
-                  <uri>urn:be:proxml:module:sparql</uri>
+                  <uri>urn:be:proxml:module:sparql:services</uri>
                 </import>
 		
 		<import>

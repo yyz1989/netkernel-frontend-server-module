@@ -28,7 +28,7 @@ import org.netkernel.layer0.representation.impl.HDSBuilder;
  *
  */
 
-
+println("groovy script is running");
 // context
 INKFRequestContext aContext = (INKFRequestContext)context;
 //
