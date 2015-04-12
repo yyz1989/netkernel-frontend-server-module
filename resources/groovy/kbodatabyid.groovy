@@ -13,6 +13,7 @@ import org.netkernel.layer0.nkf.*;
 import org.netkernel.layer0.representation.*
 import org.netkernel.layer0.representation.impl.*;
 import org.netkernel.layer0.representation.impl.HDSBuilder;
+import java.net.URLEncoder;
 
 /**
  * Processing Imports.
@@ -110,8 +111,8 @@ if (vInCache) {
 else {
 	INKFRequest freemarkerrequest = aContext.createRequest("active:freemarker");
 	freemarkerrequest.addArgument("operator", "res:/resources/freemarker/construct.freemarker");
-	freemarkerrequest.addArgumentByValue("owner", aOwner);
-	freemarkerrequest.addArgumentByValue("id", aID);
+	freemarkerrequest.addArgumentByValue("owner", URLEncoder.encode(aOwner, "UTF-8"));
+	freemarkerrequest.addArgumentByValue("id", URLEncoder.encode(aID, "UTF-8"));
 	freemarkerrequest.addArgumentByValue("extension", aExtension);
 	freemarkerrequest.setRepresentationClass(String.class);
 	String vQuery = (String)aContext.issueRequest(freemarkerrequest);
