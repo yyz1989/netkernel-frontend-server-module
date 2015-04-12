@@ -28,7 +28,6 @@ import org.netkernel.layer0.representation.impl.HDSBuilder;
  *
  */
 
-println("groovy script is running");
 // context
 INKFRequestContext aContext = (INKFRequestContext)context;
 //
@@ -116,12 +115,12 @@ else {
 	freemarkerrequest.addArgumentByValue("extension", aExtension);
 	freemarkerrequest.setRepresentationClass(String.class);
 	String vQuery = (String)aContext.issueRequest(freemarkerrequest);
-		
+
 	INKFRequest sparqlrequest = aContext.createRequest("active:httpPost");
 	HDSBuilder body = new HDSBuilder();
 	body.pushNode("query", vQuery);
 	sparqlrequest.addArgumentByValue("nvp", body.getRoot());
-	sparqlrequest.addArgumentByValue("url", "http://localhost:8083/module/sparql/query");
+	sparqlrequest.addArgument("url", "http://localhost:8083/module/sparql/query");
 	HDSBuilder newHeaders = new HDSBuilder();
 	newHeaders.addNode("Accept", "application/rdf+xml");
 	sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
