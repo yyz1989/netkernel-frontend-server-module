@@ -237,11 +237,6 @@
 						</xsl:choose>
 					</h1>
 					<div class="properties">
-<xsl:if test="dct:identifier">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:identifier"/>
-</xsl:call-template>
-</xsl:if>
 						<xsl:if test="skos:prefLabel">
 							<xsl:call-template name="tablerow">
 								<xsl:with-param name="key" select="skos:prefLabel[1]"/>
@@ -373,6 +368,52 @@
 								<xsl:with-param name="key" select="dct:isPartOf"/>
 							</xsl:call-template>
 						</xsl:if>
+<xsl:if test="rdfs:label">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="rdfs:label"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:identifier">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:identifier"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dc:creator">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dc:creator"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:modified">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:modified"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:publisher">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:publisher"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:subject">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:subject"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:title">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:title"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:distribution">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:distribution"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:landingPage">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:landingPage"/>
+</xsl:call-template>
+</xsl:if>
+
 					</div>
 					<xsl:if test="/descendant::rdf:Description[not(rdf:type)]">
 						<h2 class="links-heading">References from other resources</h2>
