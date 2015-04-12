@@ -9,8 +9,8 @@
 	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:void="http://rdfs.org/ns/void#"
 	xmlns:prov="http://www.w3.org/ns/prov#" xmlns:nk="http://1060.org"
-	xmlns:pt="http://www.proxml.be/xpath/functions/" xmlns:dcterms="http://purl.org/dc/terms/"
-	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dcterms pt"
+	xmlns:pt="http://www.proxml.be/xpath/functions/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcat="http://www.w3.org/ns/dcat#"
+	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dct pt dc dcat"
 	version="2.0">
 	<xsl:output indent="yes" method="xhtml" encoding="UTF-8"/>
 	<xsl:key name="label" match="rdf:Description" use="@rdf:about"/>
@@ -206,13 +206,12 @@
 				<div id="header">
 					<div id="logo">
 						<a href="/">
-							<span>KBO DATA</span>
+							<span>LOD VL</span>
 						</a>
 					</div>
 					<div id="lang-nav">
 						<a href="#nl" data-lang="nl">NL</a>
 						<a href="#fr" data-lang="fr">FR</a>
-						<a href="#de" data-lang="de">DE</a>
 					</div>
 				</div>
 				<div id="content">
@@ -329,9 +328,9 @@
 								<xsl:with-param name="key" select="rov:orgActivity"/>
 							</xsl:call-template>
 						</xsl:if>
-						<xsl:if test="dcterms:type">
+						<xsl:if test="dct:type">
 							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="dcterms:type"/>
+								<xsl:with-param name="key" select="dct:type"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if test="rov:orgType">
@@ -364,9 +363,9 @@
 								<xsl:with-param name="key" select="org:hasSite"/>
 							</xsl:call-template>
 						</xsl:if>
-						<xsl:if test="dcterms:isPartOf">
+						<xsl:if test="dct:isPartOf">
 							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="dcterms:isPartOf"/>
+								<xsl:with-param name="key" select="dct:isPartOf"/>
 							</xsl:call-template>
 						</xsl:if>
 					</div>
