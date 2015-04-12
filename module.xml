@@ -627,6 +627,9 @@
 			<!-- httpRequest:/ scheme -->
 			<uri>urn:org:netkernel:tpt:http</uri>
 		</import>
+                <import>
+                  <uri>urn:org:netkernel:client:http</uri>
+                </import>
 		
 		<literal type="xml" uri="res:/etc/pdsConfig.xml">
 			<config>
