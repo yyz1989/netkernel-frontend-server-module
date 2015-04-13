@@ -200,33 +200,8 @@
 							<request>
 								<identifier>res:/resources/txt/robots.txt</identifier>
 							</request>
-						</endpoint>		
-						<endpoint>
-							<meta>
-								<rest>
-									<simple>dataset/{id}/distributie/{disttype}</simple>
-									<method>GET</method>
-									<Etag>MD5</Etag>
-									<compress/>
-								</rest>
-							</meta>
-							<grammar>
-								<active>
-									<identifier>active:kbodatabydistidrestoverlay</identifier>
-									<argument name="id"/>
-                                                                        <argument name="disttype"/>
-								</active>
-							</grammar>
-							<request>
-								<identifier>active:kbodatabyid</identifier>
-								<argument name="owner">
-                                                                <literal type="string">distributie</literal>
-                                                                </argument>
-								<argument name="id" method="as-string">[[arg:id]]</argument>
-                                                                <argument name="disttype" method="as-string">[[arg:disttype]]</argument>
-							</request>
-						</endpoint>
-<endpoint>
+						</endpoint>							
+                                                <endpoint>
 							<meta>
 								<rest>
 									<simple>dataset/{id}/distributie/{disttype}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
@@ -251,6 +226,31 @@
 								<argument name="id" method="as-string">[[arg:id]]</argument>
                                                                 <argument name="disttype" method="as-string">[[arg:disttype]]</argument>
                                                                 <argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+	                                        <endpoint>
+							<meta>
+								<rest>
+									<simple>dataset/{id}/distributie/{disttype}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabydistidrestoverlay</identifier>
+									<argument name="id"/>
+                                                                        <argument name="disttype"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyid</identifier>
+								<argument name="owner">
+                                                                <literal type="string">distributie</literal>
+                                                                </argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+                                                                <argument name="disttype" method="as-string">[[arg:disttype]]</argument>
 							</request>
 						</endpoint>
                                                 <endpoint>
