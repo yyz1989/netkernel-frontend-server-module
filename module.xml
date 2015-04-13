@@ -204,7 +204,7 @@
 						<endpoint>
 							<meta>
 								<rest>
-									<simple>dataset/{id}/distributie/{type}</simple>
+									<simple>dataset/{id}/distributie/{disttype}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
@@ -214,22 +214,22 @@
 								<active>
 									<identifier>active:kbodatabydistidrestoverlay</identifier>
 									<argument name="id"/>
-                                                                        <argument name="type"/>
+                                                                        <argument name="disttype"/>
 								</active>
 							</grammar>
 							<request>
 								<identifier>active:kbodatabyid</identifier>
 								<argument name="owner">
-                                                                <literal type="string">distributie</literal>
+                                                                <literal disttype="string">distributie</literal>
                                                                 </argument>
 								<argument name="id" method="as-string">[[arg:id]]</argument>
-                                                                <argument name="type" method="as-string">[[arg:type]]</argument>
+                                                                <argument name="disttype" method="as-string">[[arg:disttype]]</argument>
 							</request>
 						</endpoint>
 <endpoint>
 							<meta>
 								<rest>
-									<simple>dataset/{id}/distributie/{type}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<simple>dataset/{id}/distributie/{disttype}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
@@ -239,7 +239,7 @@
 								<active>
 									<identifier>active:kbodatabydistidextrestoverlay</identifier>
 									<argument name="id"/>
-                                                                        <argument name="type"/>
+                                                                        <argument name="disttype"/>
                                                                         <argument name="extension"/>
 								</active>
 							</grammar>
@@ -249,7 +249,7 @@
                                                                 <literal type="string">distributie</literal>
                                                                 </argument>
 								<argument name="id" method="as-string">[[arg:id]]</argument>
-                                                                <argument name="type" method="as-string">[[arg:type]]</argument>
+                                                                <argument name="disttype" method="as-string">[[arg:disttype]]</argument>
                                                                 <argument name="extension" method="as-string">[[arg:extension]]</argument>
 							</request>
 						</endpoint>
@@ -363,7 +363,7 @@
 							<argument name="owner" desc="owner" max="1" min="1"/>				
 							<argument name="id" desc="id" max="1" min="1"/>				
 							<argument name="extension" desc="extension" max="1" min="0"/>
-                                                        <argument name="type" desc="type of distribution" max="1" min="0"/>					
+                                                        <argument name="disttype" desc="type of distribution" max="1" min="0"/>					
 						</active>
 					</grammar>
 					<prototype>GroovyPrototype</prototype>
@@ -377,7 +377,7 @@
 							<argument name="owner" desc="owner" max="1" min="1"/>				
 							<argument name="id" desc="id" max="1" min="1"/>				
 							<argument name="extension" desc="extension" max="1" min="0"/>		
-                                                        <argument name="type" desc="type of distribution" max="1" min="0"/>				
+                                                        <argument name="disttype" desc="type of distribution" max="1" min="0"/>				
 						</active>
 					</grammar>
 					<prototype>GroovyPrototype</prototype>

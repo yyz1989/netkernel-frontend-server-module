@@ -59,9 +59,9 @@ if (aContext.getThisRequest().argumentExists("id")) {
 
 // distribution type (optional)
 String aType = null;
-if (aContext.getThisRequest().argumentExists("type")) {
+if (aContext.getThisRequest().argumentExists("disttype")) {
 	try {
-		aType = aContext.source("arg:type", String.class);
+		aType = aContext.source("arg:disttype", String.class);
 	}
 	catch (Exception e) {
 		aType = "xls#id";
