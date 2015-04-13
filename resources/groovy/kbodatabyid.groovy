@@ -113,6 +113,9 @@ if (aOwner.equals("distributie")) {
 	aOwner = "dataset";
 	aID = aID + "/distributie/" + aType;
 }
+if (!aOwner.equals("dataset")) {
+	aOwner = "vrind/" + aOwner;
+}
 
 Object vSparqlResult = null;
 
