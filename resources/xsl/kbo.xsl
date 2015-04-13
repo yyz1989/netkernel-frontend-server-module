@@ -334,6 +334,33 @@
 <xsl:with-param name="key" select="dct:description"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="dct:license">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:license"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dc:format">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dc:format"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:accessURL">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:accessURL"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="dcat:downloadURL">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:downloadURL"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="dcat:mediaType">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:mediaType"/>
+</xsl:call-template>
+</xsl:if>
 <xsl:if test="vcard:hasEmail">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="vcard:hasEmail"/>
