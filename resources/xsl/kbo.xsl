@@ -334,6 +334,11 @@
 <xsl:with-param name="key" select="dct:description"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="vcard:hasEmail">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="vcard:hasEmail"/>
+</xsl:call-template>
+</xsl:if>
 
 					</div>
 					<xsl:if test="/descendant::rdf:Description[not(rdf:type)]">
