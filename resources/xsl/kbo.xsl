@@ -9,8 +9,8 @@
 	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:void="http://rdfs.org/ns/void#"
 	xmlns:prov="http://www.w3.org/ns/prov#" xmlns:nk="http://1060.org"
-	xmlns:pt="http://www.proxml.be/xpath/functions/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcat="http://www.w3.org/ns/dcat#"
-	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dct pt dc dcat"
+	xmlns:pt="http://www.proxml.be/xpath/functions/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:cc="http://creativecommons.org/ns#" xmlns:pav="http://purl.org/"
+	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dct pt dc dcat cc pav"
 	version="2.0">
 	<xsl:output indent="yes" method="xhtml" encoding="UTF-8"/>
 	<xsl:key name="label" match="rdf:Description" use="@rdf:about"/>
@@ -274,6 +274,21 @@
 <xsl:with-param name="key" select="dct:identifier"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="skos:altLabel">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="skos:altLabel"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="skos:prefLabel">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="skos:prefLabel"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="owl:sameAs">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="owl:sameAs"/>
+</xsl:call-template>
+</xsl:if>
 <xsl:if test="dc:creator">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="dc:creator"/>
@@ -364,7 +379,41 @@
 <xsl:with-param name="key" select="vcard:hasEmail"/>
 </xsl:call-template>
 </xsl:if>
-
+<xsl:if test="schema:email">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="schema:email"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="schema:faxNumber">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="schema:faxNumber"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="schema:telephone">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="schema:telephone"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="locn:fullAddress">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="locn:fullAddress"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="cc:legalcode">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="cc:legalcode"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="pav:hasEarlierVersion">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="pav:hasEarlierVersion"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="pav:version">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="pav:version"/>
+</xsl:call-template>
+</xsl:if>
 					</div>
 					<xsl:if test="/descendant::rdf:Description[not(rdf:type)]">
 						<h2 class="links-heading">References from other resources</h2>
