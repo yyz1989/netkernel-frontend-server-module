@@ -369,7 +369,7 @@
 							</xsl:call-template>
 						</xsl:if>
 <xsl:if test="rdfs:label">
-<xsl:call-template name="multiplepointerrow">
+<xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="rdfs:label"/>
 </xsl:call-template>
 </xsl:if>
@@ -416,6 +416,21 @@
 <xsl:if test="dcat:landingPage">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="dcat:landingPage"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:spatial">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:spatial"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:temporal">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:temporal"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:theme">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:theme"/>
 </xsl:call-template>
 </xsl:if>
 
