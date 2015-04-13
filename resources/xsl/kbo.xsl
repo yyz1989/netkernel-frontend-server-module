@@ -274,16 +274,6 @@
 <xsl:with-param name="key" select="dct:identifier"/>
 </xsl:call-template>
 </xsl:if>
-<xsl:if test="skos:altLabel">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="skos:altLabel"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="skos:prefLabel">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="skos:prefLabel"/>
-</xsl:call-template>
-</xsl:if>
 <xsl:if test="owl:sameAs">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="owl:sameAs"/>
