@@ -237,7 +237,7 @@
 							</meta>
 							<grammar>
 								<active>
-									<identifier>active:kbodatabydistidtyperestoverlay</identifier>
+									<identifier>active:kbodatabydistidextrestoverlay</identifier>
 									<argument name="id"/>
                                                                         <argument name="type"/>
                                                                         <argument name="extension"/>
@@ -362,7 +362,8 @@
 							<identifier>active:kbodatabyid</identifier>
 							<argument name="owner" desc="owner" max="1" min="1"/>				
 							<argument name="id" desc="id" max="1" min="1"/>				
-							<argument name="extension" desc="extension" max="1" min="0"/>				
+							<argument name="extension" desc="extension" max="1" min="0"/>
+                                                        <argument name="type" desc="type of distribution" max="1" min="0"/>					
 						</active>
 					</grammar>
 					<prototype>GroovyPrototype</prototype>
