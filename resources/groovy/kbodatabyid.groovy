@@ -113,7 +113,7 @@ if (aOwner.equals("distributie")) {
 	aOwner = "dataset";
 	aID = aID + "/distributie/" + aType;
 }
-if (!aOwner.equals("dataset")) {
+else if (aOwner.equals("concept") || aOwner.equals("conceptscheme")) {
 	aOwner = "vrind/" + aOwner;
 }
 
