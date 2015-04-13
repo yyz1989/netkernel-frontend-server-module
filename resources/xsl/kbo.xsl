@@ -247,23 +247,6 @@
 								<xsl:with-param name="key" select="skos:altLabel[1]"/>
 							</xsl:call-template>
 						</xsl:if>
-
-					</div>
-					<div class="links outbound">
-						<xsl:if test="rdf:type">
-							<xsl:for-each select="rdf:type">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
-						<xsl:if test="skos:inScheme">
-							<xsl:for-each select="skos:inScheme">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
 <xsl:if test="rdfs:label">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="rdfs:label[1]"/>
@@ -272,11 +255,6 @@
 <xsl:if test="dct:identifier">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="dct:identifier"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="owl:sameAs">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="owl:sameAs"/>
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="dc:creator">
@@ -309,26 +287,6 @@
 <xsl:with-param name="key" select="dcat:keyword"/>
 </xsl:call-template>
 </xsl:if>
-<xsl:if test="dcat:distribution">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:distribution"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:landingPage">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:landingPage"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:spatial">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:spatial"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:temporal">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:temporal"/>
-</xsl:call-template>
-</xsl:if>
 <xsl:if test="dcat:theme">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="dcat:theme"/>
@@ -349,24 +307,9 @@
 <xsl:with-param name="key" select="dc:format"/>
 </xsl:call-template>
 </xsl:if>
-<xsl:if test="dcat:accessURL">
+<xsl:if test="dcat:distribution">
 <xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:accessURL"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:downloadURL">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:downloadURL"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:mediaType">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:mediaType"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="vcard:hasEmail">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="vcard:hasEmail"/>
+<xsl:with-param name="key" select="dcat:distribution"/>
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="schema:email">
@@ -387,6 +330,63 @@
 <xsl:if test="locn:fullAddress">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="locn:fullAddress"/>
+</xsl:call-template>
+</xsl:if>
+					</div>
+					<div class="links outbound">
+						<xsl:if test="rdf:type">
+							<xsl:for-each select="rdf:type">
+								<xsl:call-template name="tablerow">
+									<xsl:with-param name="key" select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
+						<xsl:if test="skos:inScheme">
+							<xsl:for-each select="skos:inScheme">
+								<xsl:call-template name="tablerow">
+									<xsl:with-param name="key" select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
+
+<xsl:if test="owl:sameAs">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="owl:sameAs"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:landingPage">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:landingPage"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:spatial">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:spatial"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dct:temporal">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:temporal"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:accessURL">
+<xsl:call-template name="multiplepointerrow">
+<xsl:with-param name="key" select="dcat:accessURL"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:downloadURL">
+<xsl:call-template name="multiplepointerrow">
+<xsl:with-param name="key" select="dcat:downloadURL"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="dcat:mediaType">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dcat:mediaType"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="vcard:hasEmail">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="vcard:hasEmail"/>
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="cc:legalcode">
