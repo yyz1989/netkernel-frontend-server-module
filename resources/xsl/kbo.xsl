@@ -248,59 +248,6 @@
 							</xsl:call-template>
 						</xsl:if>
 
-						<xsl:if test="org:identifier">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="org:identifier"/>
-							</xsl:call-template>
-						</xsl:if>
-
-
-						<xsl:if test="schema:startDate">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="schema:startDate"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="vcard:hasURL">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="vcard:hasURL"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="vcard:hasTelephone">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="vcard:hasTelephone"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="vcard:hasEmail">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="vcard:hasEmail"/>
-							</xsl:call-template>
-						</xsl:if>
-
-						<xsl:if test="locn:thoroughfare">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:thoroughfare[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="locn:locatorDesignator">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:locatorDesignator"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="locn:postCode">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:postCode"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="locn:postName">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:postName[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="locn:fullAddress">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:fullAddress[1]"/>
-							</xsl:call-template>
-						</xsl:if>
 					</div>
 					<div class="links outbound">
 						<xsl:if test="rdf:type">
@@ -316,57 +263,6 @@
 									<xsl:with-param name="key" select="."/>
 								</xsl:call-template>
 							</xsl:for-each>
-						</xsl:if>
-						<xsl:if test="kbo:orgMainActivity">
-							<xsl:call-template name="multiplepointerrow">
-								<xsl:with-param name="key" select="kbo:orgMainActivity"/>
-							</xsl:call-template>
-
-						</xsl:if>
-						<xsl:if test="rov:orgActivity">
-							<xsl:call-template name="multiplepointerrow">
-								<xsl:with-param name="key" select="rov:orgActivity"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="dct:type">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="dct:type"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="rov:orgType">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="rov:orgType"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="rov:orgStatus">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="rov:orgStatus"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="oslo:companyStatus">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="oslo:companyStatus"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="locn:address">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="locn:address"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="org:siteOf">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="org:siteOf"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="org:hasSite">
-							<xsl:call-template name="multiplepointerrow">
-								<xsl:with-param name="key" select="org:hasSite"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="dct:isPartOf">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="dct:isPartOf"/>
-							</xsl:call-template>
 						</xsl:if>
 <xsl:if test="rdfs:label">
 <xsl:call-template name="tablerow">
