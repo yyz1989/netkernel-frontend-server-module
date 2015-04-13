@@ -369,7 +369,7 @@
 							</xsl:call-template>
 						</xsl:if>
 <xsl:if test="rdfs:label">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="rdfs:label"/>
 </xsl:call-template>
 </xsl:if>
@@ -403,8 +403,13 @@
 <xsl:with-param name="key" select="dct:title"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="dcat:keyword">
+<xsl:call-template name="multiplepointerrow">
+<xsl:with-param name="key" select="dcat:keyword"/>
+</xsl:call-template>
+</xsl:if>
 <xsl:if test="dcat:distribution">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="dcat:distribution"/>
 </xsl:call-template>
 </xsl:if>
