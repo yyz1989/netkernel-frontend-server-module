@@ -220,7 +220,7 @@
 							<request>
 								<identifier>active:kbodatabyid</identifier>
 								<argument name="owner">
-                                                                <literal disttype="string">distributie</literal>
+                                                                <literal type="string">distributie</literal>
                                                                 </argument>
 								<argument name="id" method="as-string">[[arg:id]]</argument>
                                                                 <argument name="disttype" method="as-string">[[arg:disttype]]</argument>

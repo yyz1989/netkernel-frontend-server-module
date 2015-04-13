@@ -64,7 +64,7 @@ if (aContext.getThisRequest().argumentExists("disttype")) {
 		aType = aContext.source("arg:disttype", String.class);
 	}
 	catch (Exception e) {
-		aType = "xls#id";
+		aType = "xls";
 	}
 }
 
@@ -108,9 +108,10 @@ else {
 	}
 }
 //
+aID = URLEncoder.encode(aID, "UTF-8");
 if (aOwner.equals("distributie")) {
 	aOwner = "dataset";
-	aID = aID + "/distributie/" + type;
+	aID = aID + "/distributie/" + aType;
 }
 
 Object vSparqlResult = null;
@@ -126,8 +127,8 @@ if (vInCache) {
 else {
 	INKFRequest freemarkerrequest = aContext.createRequest("active:freemarker");
 	freemarkerrequest.addArgument("operator", "res:/resources/freemarker/construct.freemarker");
-	freemarkerrequest.addArgumentByValue("owner", URLEncoder.encode(aOwner, "UTF-8"));
-	freemarkerrequest.addArgumentByValue("id", URLEncoder.encode(aID, "UTF-8"));
+	freemarkerrequest.addArgumentByValue("owner", aOwner);
+	freemarkerrequest.addArgumentByValue("id", aID);
 	freemarkerrequest.addArgumentByValue("extension", aExtension);
 	freemarkerrequest.setRepresentationClass(String.class);
 	String vQuery = (String)aContext.issueRequest(freemarkerrequest);
