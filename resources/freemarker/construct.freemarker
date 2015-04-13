@@ -12,6 +12,7 @@ PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
 CONSTRUCT {
  <http://id.vlaanderen.be/${owner}/${id}#id> ?vp ?v.
  <http://id.vlaanderen.be/${owner}/${id}#id> ?op ?out.
+ <http://id.vlaanderen.be/${owner}/${id}#id> v:hasEmail ?mail.
  ?out rdfs:label ?olabel.
  ?s ?ip <http://id.vlaanderen.be/${owner}/${id}#id>.
  ?s rdfs:label ?ilabel.
@@ -30,5 +31,9 @@ WHERE {
  UNION
  {?s ?ip <http://id.vlaanderen.be/${owner}/${id}#id>.
   OPTIONAL {?s rdfs:label ?ilabel}
+ }
+ UNION
+ {<http://id.vlaanderen.be/${owner}/${id}#id> dcat:contactPoint ?cp.
+  ?cp v:hasEmail ?mail.
  }
 }
