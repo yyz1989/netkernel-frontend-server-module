@@ -200,32 +200,8 @@
 							<request>
 								<identifier>res:/resources/txt/robots.txt</identifier>
 							</request>
-						</endpoint>
-						<endpoint>
-							<meta>
-								<rest>
-									<simple>{owner:(dataset|licentie|organisatie)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
-									<method>GET</method>
-									<Etag>MD5</Etag>
-									<compress/>
-								</rest>
-							</meta>
-							<grammar>
-								<active>
-									<identifier>active:kbodatabyidwithextensionrestoverlay</identifier>
-									<argument name="owner"/>
-									<argument name="id"/>
-									<argument name="extension"/>
-								</active>
-							</grammar>
-							<request>
-								<identifier>active:kbodatabyid</identifier>
-								<argument name="owner" method="as-string">[[arg:owner]]</argument>
-								<argument name="id" method="as-string">[[arg:id]]</argument>
-								<argument name="extension" method="as-string">[[arg:extension]]</argument>
-							</request>
 						</endpoint>		
-						<!--<endpoint>
+						<endpoint>
 							<meta>
 								<rest>
 									<simple>dataset/{id}/distributie/{type}</simple>
@@ -276,11 +252,35 @@
                                                                 <argument name="type" method="as-string">[[arg:type]]</argument>
                                                                 <argument name="extension" method="as-string">[[arg:extension]]</argument>
 							</request>
-						</endpoint>-->
+						</endpoint>
                                                 <endpoint>
 							<meta>
 								<rest>
-									<simple>{owner:(dataset|licentie|organisatie)}/{id}/</simple>
+									<simple>{owner:(dataset|licentie|organisatie)}/{id}.{extension:(rdf|ttl|nt|jsonld|html)}</simple>
+									<method>GET</method>
+									<Etag>MD5</Etag>
+									<compress/>
+								</rest>
+							</meta>
+							<grammar>
+								<active>
+									<identifier>active:kbodatabyidwithextensionrestoverlay</identifier>
+									<argument name="owner"/>
+									<argument name="id"/>
+									<argument name="extension"/>
+								</active>
+							</grammar>
+							<request>
+								<identifier>active:kbodatabyid</identifier>
+								<argument name="owner" method="as-string">[[arg:owner]]</argument>
+								<argument name="id" method="as-string">[[arg:id]]</argument>
+								<argument name="extension" method="as-string">[[arg:extension]]</argument>
+							</request>
+						</endpoint>
+                                                <endpoint>
+							<meta>
+								<rest>
+									<simple>{owner:(dataset|licentie|organisatie)}/{id}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
