@@ -57,6 +57,17 @@ if (aContext.getThisRequest().argumentExists("id")) {
 }
 //
 
+// distribution type (optional)
+String aType = null;
+if (aContext.getThisRequest().argumentExists("type")) {
+	try {
+		aType = aContext.source("arg:type", String.class);
+	}
+	catch (Exception e) {
+		aType = "xls#id";
+	}
+}
+
 // extension (optional)
 String aExtension = null;
 if (aContext.getThisRequest().argumentExists("extension")) {
@@ -97,6 +108,10 @@ else {
 	}
 }
 //
+if (aOwner.equals("distributie")) {
+	aOwner = "dataset";
+	aID = aID + "/distributie/" + type;
+}
 
 Object vSparqlResult = null;
 

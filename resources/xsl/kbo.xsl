@@ -332,6 +332,16 @@
 <xsl:with-param name="key" select="locn:fullAddress"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="pav:hasEarlierVersion">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="pav:hasEarlierVersion"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="pav:version">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="pav:version"/>
+</xsl:call-template>
+</xsl:if>
 					</div>
 					<div class="links outbound">
 						<xsl:if test="rdf:type">
@@ -392,16 +402,6 @@
 <xsl:if test="cc:legalcode">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="cc:legalcode"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="pav:hasEarlierVersion">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="pav:hasEarlierVersion"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="pav:version">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="pav:version"/>
 </xsl:call-template>
 </xsl:if>
 					</div>
