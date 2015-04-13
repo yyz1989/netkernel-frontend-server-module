@@ -418,14 +418,14 @@
 <xsl:with-param name="key" select="dcat:landingPage"/>
 </xsl:call-template>
 </xsl:if>
-<xsl:if test="dcat:spatial">
+<xsl:if test="dct:spatial">
 <xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:spatial"/>
+<xsl:with-param name="key" select="dct:spatial"/>
 </xsl:call-template>
 </xsl:if>
-<xsl:if test="dcat:temporal">
+<xsl:if test="dct:temporal">
 <xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:temporal"/>
+<xsl:with-param name="key" select="dct:temporal"/>
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="dcat:theme">
