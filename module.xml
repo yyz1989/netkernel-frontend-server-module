@@ -302,7 +302,7 @@
 						<endpoint>
 							<meta>
 								<rest>
-									<simple>/vrind/{owner:(concept|conceptscheme)}/{id}</simple>
+									<simple>vrind/{owner:(concept|conceptscheme)}/{id}</simple>
 									<method>GET</method>
 									<Etag>MD5</Etag>
 									<compress/>
