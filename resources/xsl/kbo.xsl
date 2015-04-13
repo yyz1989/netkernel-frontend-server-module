@@ -295,7 +295,7 @@
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="dct:title">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="dct:title"/>
 </xsl:call-template>
 </xsl:if>
@@ -330,7 +330,7 @@
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="dct:description">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="dct:description"/>
 </xsl:call-template>
 </xsl:if>
@@ -345,16 +345,14 @@
 </xsl:call-template>
 </xsl:if>
 <xsl:if test="dcat:accessURL">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="dcat:accessURL"/>
 </xsl:call-template>
 </xsl:if>
-</xsl:if>
 <xsl:if test="dcat:downloadURL">
-<xsl:call-template name="tablerow">
+<xsl:call-template name="multiplepointerrow">
 <xsl:with-param name="key" select="dcat:downloadURL"/>
 </xsl:call-template>
-</xsl:if>
 </xsl:if>
 <xsl:if test="dcat:mediaType">
 <xsl:call-template name="tablerow">
