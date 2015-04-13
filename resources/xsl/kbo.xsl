@@ -433,6 +433,11 @@
 <xsl:with-param name="key" select="dcat:theme"/>
 </xsl:call-template>
 </xsl:if>
+<xsl:if test="dct:description">
+<xsl:call-template name="tablerow">
+<xsl:with-param name="key" select="dct:description"/>
+</xsl:call-template>
+</xsl:if>
 
 					</div>
 					<xsl:if test="/descendant::rdf:Description[not(rdf:type)]">
