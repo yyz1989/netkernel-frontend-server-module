@@ -247,6 +247,25 @@
 								<xsl:with-param name="key" select="skos:altLabel[1]"/>
 							</xsl:call-template>
 						</xsl:if>
+                                                <xsl:if test="skos:hasTopConcept">
+							<xsl:call-template name="multiplepointerrow">
+								<xsl:with-param name="key" select="skos:hasTopConcept"/>
+							</xsl:call-template>
+						</xsl:if>
+                                                <xsl:if test="skos:inScheme">
+							<xsl:for-each select="skos:inScheme">
+								<xsl:call-template name="tablerow">
+									<xsl:with-param name="key" select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
+                                                <xsl:if test="skos:broader">
+							<xsl:for-each select="skos:broader">
+								<xsl:call-template name="tablerow">
+									<xsl:with-param name="key" select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
 <xsl:if test="rdfs:label">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="rdfs:label[1]"/>
@@ -350,15 +369,7 @@
 									<xsl:with-param name="key" select="."/>
 								</xsl:call-template>
 							</xsl:for-each>
-						</xsl:if>
-						<xsl:if test="skos:inScheme">
-							<xsl:for-each select="skos:inScheme">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
-
+						</xsl:if>		
 <xsl:if test="owl:sameAs">
 <xsl:call-template name="tablerow">
 <xsl:with-param name="key" select="owl:sameAs"/>
