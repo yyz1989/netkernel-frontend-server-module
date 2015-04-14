@@ -28,7 +28,7 @@
 				<div id="header">
 					<div id="logo">
 						<a href="/">
-							<span>KBO DATA</span>
+							<span>LOD VL</span>
 						</a>
 					</div>
 				</div>
@@ -41,8 +41,7 @@
 						<tr>
 							<th>label</th>
 							<th>identifier</th>
-							<th>score</th>
-						</tr>
+                                                </tr>
 						<xsl:for-each select="sp:results/sp:result">
 							<xsl:variable name="id">
 								<xsl:value-of select="normalize-space(sp:binding[@name='id'])"></xsl:value-of>
@@ -52,9 +51,7 @@
 							</xsl:variable>
 							<tr>
 								<td><xsl:value-of select="$label"/></td>
-								<td><a href="{$id}"><xsl:value-of select="$id"/></a></td>
-								<td><xsl:value-of select="normalize-space(sp:binding[@name='score'])"/></td>
-							</tr>
+								<td><a href="{$id}"><xsl:value-of select="$id"/></a></td>											</tr>
 						</xsl:for-each>
 					</table>
 				</div>

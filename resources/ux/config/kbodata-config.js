@@ -6,7 +6,7 @@
 	window['kbodata-config'] = {
         // search
         searchExamples: 'config/search-examples.txt',                   // path or url
-        searchEndpoint: 'http://data.kbodata.be/keywordsearch',         // path or url
+        searchEndpoint: 'http://id.vlaanderen.be/keywordsearch',         // path or url
         // query
         sparqlExamples: 'config/sparql-examples.txt',                   // path or url
         sparqlEndpoint: 'http://id.vlaanderen.be/sparql',                // path or url

@@ -2,10 +2,11 @@
 # The double-hashed line is used as query label
 
 
-## List all datasets
+## List first 10 datasets
 PREFIX dcat:    <http://www.w3.org/ns/dcat#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT distinct ?ds WHERE {
     ?ds a dcat:Dataset
 }
+LIMIT 10
