@@ -12,14 +12,7 @@
 import org.netkernel.layer0.nkf.*;
 import org.netkernel.layer0.representation.*
 import org.netkernel.layer0.representation.impl.*;
-
-
-/**
- * Processing Imports.
- */
-import java.util.List;
-import java.util.Arrays;
-import com.elbeesee.triplestore.httpclient.MIMEParse;
+import org.netkernel.layer0.representation.impl.HDSBuilder;
 
 /**
  *
@@ -31,34 +24,20 @@ import com.elbeesee.triplestore.httpclient.MIMEParse;
 INKFRequestContext aContext = (INKFRequestContext)context;
 //
 
-
 String vSearch = aContext.source("httpRequest:/param/search", String.class);
-String vLimit = aContext.source("httpRequest:/param/limit", String.class);
-
-// mimetype
-String vSupportedMimetypes = aContext.source("kbodata:mimetypes-keywordsearch-allowed", String.class);
 String vDefaultMimetype = aContext.source("kbodata:mimetypes-keywordsearch-default", String.class);
-List<String> vSupportedMimetypesList = Arrays.asList(vSupportedMimetypes.split(","));
-String vAcceptHeader = (String)aContext.source("httpRequest:/header/Accept", String.class);
-String vMimetype = MIMEParse.bestMatch(vSupportedMimetypesList, vAcceptHeader);
-//
+String vMimetype = (String)aContext.source("httpRequest:/header/Accept", String.class);
 
-INKFRequest keywordsearchrequest = aContext.createRequest("active:keywordsearch");
-keywordsearchrequest.addArgument("database", "kbodata:database");
-keywordsearchrequest.addArgument("expiry", "kbodata:expiry");
-keywordsearchrequest.addArgument("credentials", "kbodata:credentials");
+INKFRequest keywordsearchrequest = aContext.createRequest("active:httpGet");
+HDSBuilder headers = new HDSBuilder();
+keywordsearchrequest.addArgument("url", "http://localhost:8083/module/sparql/search?query=" + vSearch);
 if (vMimetype.equals("text/html")) {
-	keywordsearchrequest.addArgumentByValue("accept", vDefaultMimetype);
+	headers.addNode("Accept", vDefaultMimetype);
 }
 else {
-	keywordsearchrequest.addArgumentByValue("accept", vMimetype);
+	headers.addNode("Accept", vMimetype);
 }
-if (vSearch != null) {
-	keywordsearchrequest.addArgumentByValue("search", vSearch);
-}
-if (vLimit != null) {
-	keywordsearchrequest.addArgumentByValue("limit", vLimit);
-}
+keywordsearchrequest.addArgumentByValue("headers", headers.getRoot());
 Object vResult = aContext.issueRequest(keywordsearchrequest);
 //
 

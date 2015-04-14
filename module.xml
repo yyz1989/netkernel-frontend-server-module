@@ -557,6 +557,8 @@
 		</literal>
 		
 		<literal type="string" uri="kbodata:dataset">http://data.kbodata.be/dataset/kbo#id</literal>
+                <literal type="string" uri="kbodata:mimetypes-keywordsearch-allowed">text/html,application/sparql-results+json,application/sparql-results+xml</literal>
+                <literal type="string" uri="kbodata:mimetypes-keywordsearch-default">application/sparql-results+xml</literal>
 		
 		<import>
 			<!-- pds:/ scheme -->
