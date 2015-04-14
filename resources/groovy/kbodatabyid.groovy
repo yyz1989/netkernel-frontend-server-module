@@ -140,7 +140,7 @@ else {
 	HDSBuilder body = new HDSBuilder();
 	body.pushNode("query", vQuery);
 	sparqlrequest.addArgumentByValue("nvp", body.getRoot());
-	sparqlrequest.addArgument("url", "http://localhost:8083/sparql");
+	sparqlrequest.addArgument("url", "http://localhost:8083/module/sparql/query");
 	HDSBuilder newHeaders = new HDSBuilder();
 	newHeaders.addNode("Accept", "application/rdf+xml");
 	sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
