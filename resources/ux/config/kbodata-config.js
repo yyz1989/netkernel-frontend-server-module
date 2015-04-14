@@ -9,7 +9,7 @@
         searchEndpoint: 'http://data.kbodata.be/keywordsearch',         // path or url
         // query
         sparqlExamples: 'config/sparql-examples.txt',                   // path or url
-        sparqlEndpoint: 'http://data.kbodata.be/sparql',                // path or url
+        sparqlEndpoint: 'http://id.vlaanderen.be/sparql',                // path or url
         // lookup
         lookupExamples: 'config/lookup-examples.txt',                   // path or url
         // fragment
