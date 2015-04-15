@@ -31,7 +31,8 @@ if (aContext.exists("httpRequest:/param/search")) {
 else if (aContext.getThisRequest().argumentExists("search")) {
 	vSearch = aContext.source("arg:search", String.class);
 }
-else throw new NKFException("Keyword search request does not have a valid \"search\" argument");
+if (vSearch == null || vSearch.equals(""))
+	throw new NKFException("Keyword search request does not have a valid \"search\" argument");
 String vDefaultMimetype = aContext.source("kbodata:mimetypes-keywordsearch-default", String.class);
 String acceptHeaders = (String)aContext.source("httpRequest:/header/Accept", String.class);
 String[] extractedHeaders = acceptHeaders.split(";");
