@@ -37,7 +37,7 @@ String vQuery = aContext.source("httpRequest:/param/query", String.class);
 if (vQuery != null) {
 	// protect against injection
 	Pattern vInjectionPattern = Pattern.compile("(?i)\\bINSERT|DELETE|LOAD|CLEAR|CREATE|DROP|COPY|MOVE|ADD\\b");
-	Matcher vInjectionMatcher = vInjectionPattern.matcher(vQuery);
+	Matcher vInjectionMatcher = vInjectionPattern.matcher(vQuery.substring(0, vQuery.indexOf("{")));
 	Boolean vInjectionFound = vInjectionMatcher.find();
 
 	if (vInjectionFound) {
