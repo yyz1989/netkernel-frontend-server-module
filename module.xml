@@ -389,6 +389,7 @@
 <grammar>
 <active>
 <identifier>active:kws</identifier>
+<argument name="search" desc="search keyword" max="1" min="0"/>
 </active>
 </grammar>
 <prototype>GroovyPrototype</prototype>
@@ -433,7 +434,8 @@
 				<accessor>
 					<grammar>
 						<active>
-							<identifier>active:kbodatakeywordsearch</identifier>			
+							<identifier>active:kbodatakeywordsearch</identifier>	
+		                                        <argument name="search" desc="search keyword" max="1" min="0"/>
 						</active>
 					</grammar>
 					<prototype>GroovyPrototype</prototype>
