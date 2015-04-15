@@ -180,7 +180,7 @@
         
         submitSearch: function(keyword) {
           var endpoint = window['kbodata-config']['searchEndpoint'];
-          var url = endpoint + '?search=' + encodeURIComponent(keyword) + "&limit=10";
+          var url = endpoint + '?search=' + encodeURIComponent(keyword) ;
           location.href = url;
         },
 
