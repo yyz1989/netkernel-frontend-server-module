@@ -34,9 +34,9 @@ else if (aContext.getThisRequest().argumentExists("search")) {
 else throw new NKFException("Keyword search request does not have a valid \"search\" argument");
 String vDefaultMimetype = aContext.source("kbodata:mimetypes-keywordsearch-default", String.class);
 String acceptHeaders = (String)aContext.source("httpRequest:/header/Accept", String.class);
-String[] acceptHeaders = acceptHeaders.split(";");
-String[] acceptTypes = acceptHeaders[0].split(",");
-String vMimetype = acceptTypes[0];
+String[] extractedHeaders = acceptHeaders.split(";");
+String[] extractedTypes = extractedHeaders[0].split(",");
+String vMimetype = extractedTypes[0];
 
 INKFRequest keywordsearchrequest = aContext.createRequest("active:httpGet");
 HDSBuilder headers = new HDSBuilder();
