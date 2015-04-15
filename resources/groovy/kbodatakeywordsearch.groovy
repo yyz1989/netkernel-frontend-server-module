@@ -24,7 +24,14 @@ import org.netkernel.layer0.representation.impl.HDSBuilder;
 INKFRequestContext aContext = (INKFRequestContext)context;
 //
 
-String vSearch = aContext.source("httpRequest:/param/search", String.class);
+String vSearch;
+if (aContext.exists("httpRequest:/param/search")) {
+	vSearch = aContext.source("httpRequest:/param/search", String.class);
+}
+else if (aContext.getThisRequest().argumentExists("search")) {
+	vSearch = aContext.source("arg:search", String.class);
+}
+else throw new NKFException("Keyword search request does not have a valid \"search\" argument");
 String vDefaultMimetype = aContext.source("kbodata:mimetypes-keywordsearch-default", String.class);
 String acceptHeaders = (String)aContext.source("httpRequest:/header/Accept", String.class);
 String[] acceptHeaders = acceptHeaders.split(";");
