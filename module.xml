@@ -94,6 +94,22 @@
 								<identifier>res:/resources/html/defaultRoot.html</identifier>
 							</request>
 						</endpoint>
+<endpoint>
+<meta>
+<rest>
+<simple>kws</simple>
+<method>GET</method>
+</rest>
+</meta>
+<grammar>
+<active>
+<identifier>active:lodvlkws</identifier>
+</active>
+</grammar>
+<request>
+<identifier>active:kws</identifier>
+</request>
+</endpoint>
 						<endpoint>
 							<meta>
 								<rest>
@@ -369,7 +385,15 @@
 					<prototype>GroovyPrototype</prototype>
 					<script>res:/resources/groovy/kbodatabyid.groovy</script>
 				</accessor>
-				
+<accessor>
+<grammar>
+<active>
+<identifier>active:kws</identifier>
+</active>
+</grammar>
+<prototype>GroovyPrototype</prototype>
+<script>res:/resources/groovy/kbodatakeywordsearch.groovy</script>
+</accessor>
 				<accessor>
 					<grammar>
 						<active>
@@ -593,11 +617,6 @@
 		<import>
 			<!-- active:reconcile -->
 			<uri>urn:com:elbeesee:triplestore:httpclient:reconcile:larq</uri>
-			<version-min>1.6.0</version-min>
-		</import>
-		<import>
-			<!-- active:keywordsearch -->
-			<uri>urn:com:elbeesee:triplestore:httpclient:kws:larq</uri>
 			<version-min>1.6.0</version-min>
 		</import>
 	</rootspace>
