@@ -26,7 +26,10 @@ INKFRequestContext aContext = (INKFRequestContext)context;
 
 String vSearch = aContext.source("httpRequest:/param/search", String.class);
 String vDefaultMimetype = aContext.source("kbodata:mimetypes-keywordsearch-default", String.class);
-String vMimetype = (String)aContext.source("httpRequest:/header/Accept", String.class);
+String acceptHeaders = (String)aContext.source("httpRequest:/header/Accept", String.class);
+String[] acceptHeaders = acceptHeaders.split(";");
+String[] acceptTypes = acceptHeaders[0].split(",");
+String vMimetype = acceptTypes[0];
 
 INKFRequest keywordsearchrequest = aContext.createRequest("active:httpGet");
 HDSBuilder headers = new HDSBuilder();
