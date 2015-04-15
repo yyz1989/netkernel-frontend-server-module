@@ -93,7 +93,9 @@ else {
 sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
 @SuppressWarnings("rawtypes")
 INKFResponseReadOnly sparqlresponse = aContext.issueRequestForResponse(sparqlrequest);
-String vException = (String)sparqlresponse.getHeader("exception");
+String vException;
+if (sparqlresponse.hasHeader("exception"))
+	vException = (String)sparqlresponse.getHeader("exception");
 Object vResult = sparqlresponse.getRepresentation();
 //
 
