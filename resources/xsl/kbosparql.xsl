@@ -11,7 +11,7 @@
 		<html>
 			<head>
 				<title>
-					<xsl:value-of select="concat('KBO:', 'SPARQL query results')"/>
+					<xsl:value-of select="concat('LOD VL:', 'SPARQL query results')"/>
 				</title>
 				<meta name="viewport"
 					content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
@@ -26,7 +26,7 @@
 				<div id="header">
 					<div id="logo">
 						<a href="/">
-							<span>KBO DATA</span>
+							<span>LOD VL</span>
 						</a>
 					</div>
 				</div>

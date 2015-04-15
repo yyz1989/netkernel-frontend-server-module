@@ -41,7 +41,7 @@ if (vQuery != null) {
 	Boolean vInjectionFound = vInjectionMatcher.find();
 
 	if (vInjectionFound) {
-		vQuery = null;
+		throw new NKFException("SPARQL query operation is not supported");
 	}
 }
 
@@ -70,30 +70,27 @@ if (vAcceptHeader == null) {
 	}
 }
 
-INKFRequest sparqlrequest = aContext.createRequest("active:sparql");
-sparqlrequest.addArgument("database", "kbodata:database");
-if (vQuery != null) {
-	sparqlrequest.addArgumentByValue("query", vQuery);
-}
-else {
-	sparqlrequest.addArgument("query", "kbodata:query");
-}
-sparqlrequest.addArgument("expiry", "kbodata:expiry");
-sparqlrequest.addArgument("credentials", "kbodata:credentials");
+INKFRequest sparqlrequest = aContext.createRequest("active:httpPost");
+HDSBuilder body = new HDSBuilder();
+body.pushNode("query", vQuery);
+sparqlrequest.addArgumentByValue("nvp", body.getRoot());
+sparqlrequest.addArgument("url", "http://localhost:8083/module/sparql/query");
+HDSBuilder newHeaders = new HDSBuilder();
 if (vAcceptHeader.startsWith("text/html")) {
 	if (vConstructFound || vDescribeFound) {
-		sparqlrequest.addArgumentByValue("accept", "application/rdf+xml");
+		newHeaders.addNode("Accept", "application/rdf+xml");
 	}
 	else if (vAskFound) {
-		sparqlrequest.addArgumentByValue("accept", "text/boolean");
+		newHeaders.addNode("Accept", "text/boolean");
 	}
 	else {
-		sparqlrequest.addArgumentByValue("accept", "application/sparql-results+xml");
+		newHeaders.addNode("Accept", "application/sparql-results+xml");
 	}
 }
 else {
-	sparqlrequest.addArgumentByValue("accept", vAcceptHeader);
+	newHeaders.addNode("Accept", vAcceptHeader);
 }
+sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
 @SuppressWarnings("rawtypes")
 INKFResponseReadOnly sparqlresponse = aContext.issueRequestForResponse(sparqlrequest);
 String vException = (String)sparqlresponse.getHeader("exception");
