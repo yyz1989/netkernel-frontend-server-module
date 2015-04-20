@@ -70,27 +70,23 @@ if (vAcceptHeader == null) {
 	}
 }
 
-INKFRequest sparqlrequest = aContext.createRequest("active:httpPost");
-HDSBuilder body = new HDSBuilder();
-body.pushNode("query", vQuery);
-sparqlrequest.addArgumentByValue("nvp", body.getRoot());
-sparqlrequest.addArgument("url", "http://localhost:8083/module/sparql/query");
-HDSBuilder newHeaders = new HDSBuilder();
+INKFRequest sparqlrequest = aContext.createRequest("active:sparqlQuery");
+sparqlrequest.addArgumentByValue("query", vQuery);
 if (vAcceptHeader.startsWith("text/html")) {
 	if (vConstructFound || vDescribeFound) {
-		newHeaders.addNode("Accept", "application/rdf+xml");
+		sparqlrequest.addArgumentByValue("accept", "application/rdf+xml");
 	}
 	else if (vAskFound) {
-		newHeaders.addNode("Accept", "text/boolean");
+		sparqlrequest.addArgumentByValue("accept", "text/boolean");
 	}
 	else {
-		newHeaders.addNode("Accept", "application/sparql-results+xml");
+		sparqlrequest.addArgumentByValue("accept", "application/sparql-results+xml");
 	}
 }
 else {
-	newHeaders.addNode("Accept", vAcceptHeader);
+	sparqlrequest.addArgumentByValue("accept", vAcceptHeader);
 }
-sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
+
 @SuppressWarnings("rawtypes")
 INKFResponseReadOnly sparqlresponse = aContext.issueRequestForResponse(sparqlrequest);
 String vException;
