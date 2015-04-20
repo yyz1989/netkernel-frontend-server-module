@@ -34,6 +34,7 @@ String vPredicate = aContext.source("httpRequest:/param/predicate", String.class
 String vObject = aContext.source("httpRequest:/param/object", String.class);
 String vLimit = aContext.source("httpRequest:/param/limit", String.class);
 String vOffset = aContext.source("httpRequest:/param/offset", String.class);
+String vURL = aContext.source("httpRequest:/url", String.class);
 String vQuery = aContext.source("httpRequest:/query", String.class);
 
 String aExtension = null;
@@ -65,8 +66,6 @@ catch (Exception e) {
 
 String vIdentity = "";
 INKFRequest fragmentsrequest = aContext.createRequest("active:fragmentsQuery");
-fragmentsrequest.addArgumentByValue("query", vQuery);
-fragmentsrequest.addArgumentByValue("accept", "application/rdf+xml");
 
 if (vSubject != null) {
 	fragmentsrequest.addArgumentByValue("subject", vSubject);
@@ -87,6 +86,9 @@ if (vLimit != null) {
 if (vOffset != null) {
 	fragmentsrequest.addArgumentByValue("offset", vOffset);
 	vIdentity = vIdentity + "f=" + vOffset + "-";
+}
+if (vURL != null) {
+	fragmentsrequest.addArgumentByValue("url", vURL);
 }
 if (vQuery != null) {
 	fragmentsrequest.addArgumentByValue("query", vQuery);
