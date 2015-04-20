@@ -1,100 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-	xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:kbo="http://data.kbodata.be/def#"
-	xmlns:locn="http://www.w3.org/ns/locn#" xmlns:org="http://www.w3.org/ns/org#"
-	xmlns:oslo="http://purl.org/oslo/ns/localgov#" xmlns:owl="http://www.w3.org/2002/07/owl#"
+<xsl:stylesheet
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:kbo="http://data.kbodata.be/def#"
+	xmlns:locn="http://www.w3.org/ns/locn#"
+	xmlns:org="http://www.w3.org/ns/org#"
+	xmlns:oslo="http://purl.org/oslo/ns/localgov#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
 	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rov="http://www.w3.org/ns/regorg#"
-	xmlns:schema="http://schema.org/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-	xmlns:vcard="http://www.w3.org/2006/vcard/ns#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:void="http://rdfs.org/ns/void#"
-	xmlns:prov="http://www.w3.org/ns/prov#" xmlns:nk="http://1060.org"
-	xmlns:pt="http://www.proxml.be/xpath/functions/" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:cc="http://creativecommons.org/ns#" xmlns:pav="http://purl.org/pav/"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:rov="http://www.w3.org/ns/regorg#"
+	xmlns:schema="http://schema.org/"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:void="http://rdfs.org/ns/void#"
+	xmlns:prov="http://www.w3.org/ns/prov#"
+	xmlns:nk="http://1060.org"
+	xmlns:pt="http://www.proxml.be/xpath/functions/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcat="http://www.w3.org/ns/dcat#"
+	xmlns:cc="http://creativecommons.org/ns#"
+	xmlns:pav="http://purl.org/pav/"
 	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dct pt dc dcat cc pav"
 	version="2.0">
-	<xsl:output indent="yes" method="xhtml" encoding="UTF-8"/>
-	<xsl:key name="label" match="rdf:Description" use="@rdf:about"/>
-	<xsl:function name="pt:q2uri">
-		<xsl:param name="q"/>
-		<xsl:sequence select="concat(namespace-uri($q),local-name($q))"/>
+	<xsl:output
+		indent="yes"
+		method="xhtml"
+		encoding="UTF-8"/>
+	<xsl:key
+		name="label"
+		match="rdf:Description"
+		use="@rdf:about"/>
+	<xsl:function
+		name="pt:q2uri">
+		<xsl:param
+			name="q"/>
+		<xsl:sequence
+			select="concat(namespace-uri($q),local-name($q))"/>
 	</xsl:function>
-	<xsl:template name="tablerow">
-		<xsl:param name="key" as="node()"/>
-		<xsl:param name="nace"/>
+	<xsl:template
+		name="tablerow">
+		<xsl:param
+			name="key"
+			as="node()"/>
+		<xsl:param
+			name="nace"/>
 		<xsl:choose>
-			<xsl:when test="$key[@rdf:resource]">
-				<xsl:call-template name="pointertablerow">
-					<xsl:with-param name="key" select="$key"/>
-					<xsl:with-param name="nace" select="$nace"/>
+			<xsl:when
+				test="$key[@rdf:resource]">
+				<xsl:call-template
+					name="pointertablerow">
+					<xsl:with-param
+						name="key"
+						select="$key"/>
+					<xsl:with-param
+						name="nace"
+						select="$nace"/>
 				</xsl:call-template>
 			</xsl:when>
-			<xsl:when test="$key[@xml:lang]">
-				<xsl:call-template name="atomiclangrow">
-					<xsl:with-param name="key" select="$key"/>
+			<xsl:when
+				test="$key[@xml:lang]">
+				<xsl:call-template
+					name="atomiclangrow">
+					<xsl:with-param
+						name="key"
+						select="$key"/>
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="atomictablerow">
-					<xsl:with-param name="key" select="$key"/>
+				<xsl:call-template
+					name="atomictablerow">
+					<xsl:with-param
+						name="key"
+						select="$key"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<xsl:template name="atomictablerow">
-		<xsl:param name="key" as="node()"/>
-		<div class="predicate">
-			<a class="label" href="{pt:q2uri($key)}">
-				<xsl:value-of select="local-name($key)"/>
+	<xsl:template
+		name="atomictablerow">
+		<xsl:param
+			name="key"
+			as="node()"/>
+		<div
+			class="predicate">
+			<a
+				class="label"
+				href="{pt:q2uri($key)}">
+				<xsl:value-of
+					select="local-name($key)"/>
 			</a>
-			<div class="objects">
-				<xsl:for-each select="$key">
+			<div
+				class="objects">
+				<xsl:for-each
+					select="$key">
 					<p>
-						<xsl:if test="@xml:lang">
-							<xsl:attribute name="xml:lang">
-								<xsl:value-of select="@xml:lang"/>
+						<xsl:if
+							test="@xml:lang">
+							<xsl:attribute
+								name="xml:lang">
+								<xsl:value-of
+									select="@xml:lang"/>
 							</xsl:attribute>
 						</xsl:if>
-						<xsl:value-of select="normalize-space(.)"/>
+						<xsl:value-of
+							select="normalize-space(.)"/>
 					</p>
 				</xsl:for-each>
 			</div>
 		</div>
 	</xsl:template>
-	<xsl:template name="pointertablerow">
-		<xsl:param name="key" as="node()"/>
-		<xsl:param name="nace"/>
-		<div class="predicate">
-			<a class="label" href="{pt:q2uri($key)}">
-				<xsl:value-of select="local-name($key)"/>
+	<xsl:template
+		name="pointertablerow">
+		<xsl:param
+			name="key"
+			as="node()"/>
+		<xsl:param
+			name="nace"/>
+		<div
+			class="predicate">
+			<a
+				class="label"
+				href="{pt:q2uri($key)}">
+				<xsl:value-of
+					select="local-name($key)"/>
 				<!--<xsl:if test="string-length($nace) > 1">
 						<xsl:text> NACE </xsl:text>
 						<xsl:value-of select="$nace"/>
 					</xsl:if>-->
 			</a>
-			<xsl:for-each select="$key">
+			<xsl:for-each
+				select="$key">
 				<xsl:choose>
 					<xsl:when
 						test="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
-						<div class="objects">
+						<div
+							class="objects">
 							<xsl:for-each
 								select="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
 
-								<a href="{../@rdf:about}">
-									<xsl:if test="@xml:lang">
-										<xsl:attribute name="xml:lang">
-											<xsl:value-of select="@xml:lang"/>
+								<a
+									href="{../@rdf:about}">
+									<xsl:if
+										test="@xml:lang">
+										<xsl:attribute
+											name="xml:lang">
+											<xsl:value-of
+												select="@xml:lang"/>
 										</xsl:attribute>
 									</xsl:if>
-									<xsl:value-of select="normalize-space(.)"/>
+									<xsl:value-of
+										select="normalize-space(.)"/>
 								</a>
 
 							</xsl:for-each>
 						</div>
 					</xsl:when>
 					<xsl:otherwise>
-						<div class="objects">
-							<a href="{@rdf:resource}">
-								<xsl:value-of select="@rdf:resource"/>
+						<div
+							class="objects">
+							<a
+								href="{@rdf:resource}">
+								<xsl:value-of
+									select="@rdf:resource"/>
 							</a>
 						</div>
 					</xsl:otherwise>
@@ -102,13 +172,100 @@
 			</xsl:for-each>
 		</div>
 	</xsl:template>
-	<xsl:template name="multiplepointerrow">
-		<xsl:param name="key" as="node()+"/>
-		<div class="predicate">
-			<a class="label" href="{pt:q2uri($key[1])}">
-				<xsl:value-of select="local-name($key[1])"/>
+	<xsl:template
+		name="atomiclangrow">
+		<xsl:param
+			name="key"
+			as="node()"/>
+		<div
+			class="predicate">
+			<a
+				class="label"
+				href="{pt:q2uri($key)}">
+				<xsl:value-of
+					select="local-name($key)"/>
 			</a>
-			<div class="objects">
+			<div
+				class="objects">
+				<p>
+					<xsl:if
+						test="$key[@xml:lang]">
+						<xsl:attribute
+							name="xml:lang">
+							<xsl:value-of
+								select="$key/@xml:lang"/>
+						</xsl:attribute>
+					</xsl:if>
+					<xsl:value-of
+						select="normalize-space($key)"/>
+				</p>
+				<xsl:for-each
+					select="$key/following-sibling::*[name(.)=name($key)]">
+					<p>
+						<xsl:if
+							test="@xml:lang">
+							<xsl:attribute
+								name="xml:lang">
+								<xsl:value-of
+									select="@xml:lang"/>
+							</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of
+							select="normalize-space(.)"/>
+					</p>
+				</xsl:for-each>
+			</div>
+
+		</div>
+	</xsl:template>
+	<xsl:template
+		name="multiplevaluerow">
+		<xsl:param
+			name="key"
+			as="node()+"/>
+		<div
+			class="predicate">
+			<a
+				class="label"
+				href="{pt:q2uri($key[1])}">
+				<xsl:value-of
+					select="local-name($key[1])"/>
+			</a>
+			<div
+				class="objects">
+				<xsl:for-each
+					select="$key">
+					<p>
+						<xsl:if
+							test="@xml:lang">
+							<xsl:attribute
+								name="xml:lang">
+								<xsl:value-of
+									select="@xml:lang"/>
+							</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of
+							select="normalize-space(.)"/>
+					</p>
+				</xsl:for-each>
+			</div>
+		</div>
+	</xsl:template>
+	<xsl:template
+		name="multiplepointerrow">
+		<xsl:param
+			name="key"
+			as="node()+"/>
+		<div
+			class="predicate">
+			<a
+				class="label"
+				href="{pt:q2uri($key[1])}">
+				<xsl:value-of
+					select="local-name($key[1])"/>
+			</a>
+			<div
+				class="objects">
 				<!--<xsl:for-each select="$key">
 					<xsl:for-each
 						select="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
@@ -124,328 +281,515 @@
 				</xsl:for-each>-->
 				<xsl:for-each
 					select="//rdf:Description[@rdf:about = $key/@rdf:resource]/rdfs:label">
-					<xsl:sort select="."/>
-					<a href="{../@rdf:about}">
-						<xsl:if test="@xml:lang">
-							<xsl:attribute name="xml:lang">
-								<xsl:value-of select="@xml:lang"/>
+					<xsl:sort
+						select="."/>
+					<a
+						href="{../@rdf:about}">
+						<xsl:if
+							test="@xml:lang">
+							<xsl:attribute
+								name="xml:lang">
+								<xsl:value-of
+									select="@xml:lang"/>
 							</xsl:attribute>
 						</xsl:if>
-						<xsl:value-of select="normalize-space(.)"/>
+						<xsl:value-of
+							select="normalize-space(.)"/>
 					</a>
 				</xsl:for-each>
 			</div>
 		</div>
 	</xsl:template>
-	<xsl:template name="atomiclangrow">
-		<xsl:param name="key" as="node()"/>
-		<div class="predicate">
-			<a class="label" href="{pt:q2uri($key)}">
-				<xsl:value-of select="local-name($key)"/>
-			</a>
-			<div class="objects">
-				<p>
-					<xsl:if test="$key[@xml:lang]">
-						<xsl:attribute name="xml:lang">
-							<xsl:value-of select="$key/@xml:lang"/>
-						</xsl:attribute>
-					</xsl:if>
-					<xsl:value-of select="normalize-space($key)"/>
-				</p>
-				<xsl:for-each select="$key/following-sibling::*[name(.)=name($key)]">
-					<p>
-						<xsl:if test="@xml:lang">
-							<xsl:attribute name="xml:lang">
-								<xsl:value-of select="@xml:lang"/>
-							</xsl:attribute>
-						</xsl:if>
-						<xsl:value-of select="normalize-space(.)"/>
-					</p>
-				</xsl:for-each>
-			</div>
-
-		</div>
+	<xsl:template
+		match="/">
+		<xsl:apply-templates
+			select="rdf:RDF/rdf:Description[rdf:type]"/>
 	</xsl:template>
-	<xsl:template match="/">
-		<xsl:apply-templates select="rdf:RDF/rdf:Description[rdf:type]"/>
-	</xsl:template>
-	<xsl:template match="rdf:Description[rdf:type]">
-		<xsl:variable name="identifier">
-			<xsl:value-of select="descendant::rdf:Description[rdf:type]/@rdf:about"/>
+	<xsl:template
+		match="rdf:Description[rdf:type]">
+		<xsl:variable
+			name="identifier">
+			<xsl:value-of
+				select="descendant::rdf:Description[rdf:type]/@rdf:about"/>
 		</xsl:variable>
-		<xsl:variable name="docid">
-			<xsl:value-of select="substring-before(@rdf:about,'#')"/>
+		<xsl:variable
+			name="docid">
+			<xsl:value-of
+				select="substring-before(@rdf:about,'#')"/>
 		</xsl:variable>
 		<html>
 			<head>
 				<title>
 					<xsl:choose>
-						<xsl:when test="org:identifier">
-							<xsl:value-of select="concat('KBO:', org:identifier)"/>
+						<xsl:when
+							test="org:identifier">
+							<xsl:value-of
+								select="concat('Vlaanderen:', org:identifier)"/>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="concat('KBO:', rdfs:label[1])"/>
+							<xsl:value-of
+								select="concat('Vlaanderen:', rdfs:label[1])"/>
 						</xsl:otherwise>
 					</xsl:choose>
-					
+
 				</title>
-				<meta name="viewport"
+				<meta
+					name="viewport"
 					content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
-				<link rel="alternate" type="application/rdf+xml" href="{$docid}.rdf"/>
-				<link rel="alternate" type="text/turtle" href="{$docid}.ttl"/>
-				<link rel="alternate" type="text/plain" href="{$docid}.nt"/>
-				<link rel="alternate" type="application/ld+json" href="{$docid}.jsonld"/>
+				<link
+					rel="alternate"
+					type="application/rdf+xml"
+					href="{$docid}.rdf"/>
+				<link
+					rel="alternate"
+					type="text/turtle"
+					href="{$docid}.ttl"/>
+				<link
+					rel="alternate"
+					type="text/plain"
+					href="{$docid}.nt"/>
+				<link
+					rel="alternate"
+					type="application/ld+json"
+					href="{$docid}.jsonld"/>
 				<style type="text/css">
 					@import url(/css/page.css);
 					@import url(/css/resource.css);
 					@import url(/css/responsive.css);
-		            @import url(/css/print.css);</style>
-				<link rel="shortcut icon" href="/img/favicon.png"/>
+					@import url(/css/print.css);</style>
+				<link
+					rel="shortcut icon"
+					href="/img/favicon.png"/>
 			</head>
 			<body>
-				<div id="header">
-					<div id="logo">
-						<a href="/">
+				<div
+					id="header">
+					<div
+						id="logo">
+						<a
+							href="/">
 							<span>LOD VL</span>
 						</a>
 					</div>
-					<div id="lang-nav">
+					<!--<div id="lang-nav">
 						<a href="#nl" data-lang="nl">NL</a>
 						<a href="#fr" data-lang="fr">FR</a>
-					</div>
+					</div>-->
 				</div>
-				<div id="content">
-					<div class="export-options">
-						<a href="">HTML</a>
-						<a href="{$docid}.jsonld">JSON-LD</a>
-						<a href="{$docid}.ttl">TURTLE</a>
-						<a href="{$docid}.nt">N-TRIPLES</a>
-						<a href="{$docid}.rdf">XML</a>
+				<div
+					id="content">
+					<div
+						class="export-options">
+						<a
+							href="">HTML</a>
+						<a
+							href="{$docid}.jsonld">JSON-LD</a>
+						<a
+							href="{$docid}.ttl">TURTLE</a>
+						<a
+							href="{$docid}.nt">N-TRIPLES</a>
+						<a
+							href="{$docid}.rdf">XML</a>
 					</div>
 					<h1>
 						<xsl:choose>
-							<xsl:when test="rdfs:label[@xml:lang]">
-								<xsl:for-each select="rdfs:label[@xml:lang]">
-									<span xml:lang="{@xml:lang}">
-										<xsl:value-of select="normalize-space(.)"/>
+							<xsl:when
+								test="rdfs:label[@xml:lang]">
+								<xsl:for-each
+									select="rdfs:label[@xml:lang]">
+									<span
+										xml:lang="{@xml:lang}">
+										<xsl:value-of
+											select="normalize-space(.)"/>
 									</span>
 								</xsl:for-each>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="rdfs:label"/>
+								<xsl:value-of
+									select="rdfs:label"/>
 							</xsl:otherwise>
 						</xsl:choose>
 					</h1>
-					<div class="properties">
-						<xsl:if test="skos:prefLabel">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="skos:prefLabel[1]"/>
+					<div
+						class="properties">
+						<xsl:if
+							test="skos:prefLabel">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="skos:prefLabel[1]"/>
 							</xsl:call-template>
 						</xsl:if>
-						<xsl:if test="skos:altLabel">
-							<xsl:call-template name="tablerow">
-								<xsl:with-param name="key" select="skos:altLabel[1]"/>
+						<xsl:if
+							test="skos:altLabel">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="skos:altLabel[1]"/>
 							</xsl:call-template>
 						</xsl:if>
-                                                <xsl:if test="skos:hasTopConcept">
-							<xsl:call-template name="multiplepointerrow">
-								<xsl:with-param name="key" select="skos:hasTopConcept"/>
+						
+						<xsl:if
+							test="not(exists(dct:title)) and rdfs:label">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="rdfs:label[1]"/>
 							</xsl:call-template>
 						</xsl:if>
-                                                <xsl:if test="skos:inScheme">
-							<xsl:for-each select="skos:inScheme">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
+						<xsl:if
+							test="dct:title">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:title[1]"/>
+							</xsl:call-template>
 						</xsl:if>
-                                                <xsl:if test="skos:broader">
-							<xsl:for-each select="skos:broader">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
+						<xsl:if
+							test="dct:description">
+							<xsl:call-template
+								name="atomictablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:description"/>
+							</xsl:call-template>
 						</xsl:if>
-<xsl:if test="rdfs:label">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="rdfs:label[1]"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:identifier">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:identifier"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dc:creator">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dc:creator"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:modified">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:modified"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:publisher">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:publisher"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:subject">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:subject"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:title">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:title[1]"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:keyword">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:keyword"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:theme">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:theme"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:description">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dct:description"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:license">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:license"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dc:format">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dc:format"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:distribution">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:distribution"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="schema:email">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="schema:email"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="schema:faxNumber">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="schema:faxNumber"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="schema:telephone">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="schema:telephone"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="locn:fullAddress">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="locn:fullAddress"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="pav:hasEarlierVersion">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="pav:hasEarlierVersion"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="pav:version">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="pav:version"/>
-</xsl:call-template>
-</xsl:if>
+						<xsl:if
+							test="dct:identifier">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:identifier"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dc:creator">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dc:creator"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dct:modified">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:modified"/>
+							</xsl:call-template>
+						</xsl:if>
+						
+						
+						<xsl:if
+							test="dcat:keyword">
+							<xsl:call-template
+								name="multiplevaluerow">
+								<xsl:with-param
+									name="key"
+									select="dcat:keyword"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dcat:theme">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dcat:theme"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dct:license">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:license"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dc:format">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dc:format"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="schema:email">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="schema:email"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="schema:faxNumber">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="schema:faxNumber"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="schema:telephone">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="schema:telephone"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="locn:fullAddress">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="locn:fullAddress"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="pav:hasEarlierVersion">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="pav:hasEarlierVersion"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="pav:version">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="pav:version"/>
+							</xsl:call-template>
+						</xsl:if>
 					</div>
-					<div class="links outbound">
-						<xsl:if test="rdf:type">
-							<xsl:for-each select="rdf:type">
-								<xsl:call-template name="tablerow">
-									<xsl:with-param name="key" select="."/>
+					<div
+						class="links outbound">
+						<xsl:if
+							test="rdf:type">
+							<xsl:for-each
+								select="rdf:type">
+								<xsl:call-template
+									name="tablerow">
+									<xsl:with-param
+										name="key"
+										select="."/>
 								</xsl:call-template>
 							</xsl:for-each>
-						</xsl:if>		
-<xsl:if test="owl:sameAs">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="owl:sameAs"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:landingPage">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:landingPage"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:spatial">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:spatial"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dct:temporal">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dct:temporal"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:accessURL">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:accessURL"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:downloadURL">
-<xsl:call-template name="multiplepointerrow">
-<xsl:with-param name="key" select="dcat:downloadURL"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="dcat:mediaType">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="dcat:mediaType"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="vcard:hasEmail">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="vcard:hasEmail"/>
-</xsl:call-template>
-</xsl:if>
-<xsl:if test="cc:legalcode">
-<xsl:call-template name="tablerow">
-<xsl:with-param name="key" select="cc:legalcode"/>
-</xsl:call-template>
-</xsl:if>
+						</xsl:if>
+						<xsl:if
+							test="skos:hasTopConcept">
+							<xsl:call-template
+								name="multiplepointerrow">
+								<xsl:with-param
+									name="key"
+									select="skos:hasTopConcept"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="skos:inScheme">
+							<xsl:for-each
+								select="skos:inScheme">
+								<xsl:call-template
+									name="tablerow">
+									<xsl:with-param
+										name="key"
+										select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
+						<xsl:if
+							test="skos:broader">
+							<xsl:for-each
+								select="skos:broader">
+								<xsl:call-template
+									name="tablerow">
+									<xsl:with-param
+										name="key"
+										select="."/>
+								</xsl:call-template>
+							</xsl:for-each>
+						</xsl:if>
+						
+						<xsl:if
+							test="dcat:distribution">
+							<xsl:call-template
+								name="multiplepointerrow">
+								<xsl:with-param
+									name="key"
+									select="dcat:distribution"/>
+							</xsl:call-template>
+						</xsl:if>
+						
+						<xsl:if
+							test="dct:publisher">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:publisher"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dct:subject">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:subject"/>
+							</xsl:call-template>
+						</xsl:if>
+
+						<xsl:if
+							test="owl:sameAs">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="owl:sameAs"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dcat:landingPage">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dcat:landingPage"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dct:spatial">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:spatial"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dct:temporal">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dct:temporal"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dcat:accessURL">
+							<xsl:call-template
+								name="multiplepointerrow">
+								<xsl:with-param
+									name="key"
+									select="dcat:accessURL"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dcat:downloadURL">
+							<xsl:call-template
+								name="multiplepointerrow">
+								<xsl:with-param
+									name="key"
+									select="dcat:downloadURL"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="dcat:mediaType">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="dcat:mediaType"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="vcard:hasEmail">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="vcard:hasEmail"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="cc:legalcode">
+							<xsl:call-template
+								name="tablerow">
+								<xsl:with-param
+									name="key"
+									select="cc:legalcode"/>
+							</xsl:call-template>
+						</xsl:if>
 					</div>
-					<xsl:if test="/descendant::rdf:Description[not(rdf:type)]">
-						<h2 class="links-heading">References from other resources</h2>
-						<div class="links inbound">
+					<xsl:if
+						test="/descendant::rdf:Description[not(rdf:type) and *[@rdf:resource]]">
+						<h2
+							class="links-heading">References from other resources</h2>
+						<div
+							class="links inbound">
 							<xsl:for-each-group
 								select="/descendant::rdf:Description[not(rdf:type)]/*[@rdf:resource and namespace-uri() != 'http://purl.org/dc/terms/']"
 								group-by="node-name(.)">
 								<!--<xsl:sort select="current-grouping-key()"/>-->
-								<div class="predicate">
-									<a class="label" href="{concat(namespace-uri(.),local-name(.))}">
-										<xsl:value-of select="current-grouping-key()"/>
+								<div
+									class="predicate">
+									<a
+										class="label"
+										href="{concat(namespace-uri(.),local-name(.))}">
+										<xsl:value-of
+											select="current-grouping-key()"/>
 									</a>
-									<div class="objects">
-										<xsl:variable name="list" as="node()*">
-											<xsl:for-each select="current-group()">
-												<xsl:for-each select="preceding-sibling::rdfs:label">
-												  <xsl:copy>
-												  	<xsl:copy-of select="@*"/>
-												  	<xsl:attribute name="parentid" select="parent::rdf:Description/@rdf:about"/>
-												  	<xsl:attribute name="value" select="text()"/>
-												  </xsl:copy>
+									<div
+										class="objects">
+										<xsl:variable
+											name="list"
+											as="node()*">
+											<xsl:for-each
+												select="current-group()">
+												<xsl:for-each
+												select="preceding-sibling::rdfs:label">
+												<xsl:copy>
+												<xsl:copy-of
+												select="@*"/>
+												<xsl:attribute
+												name="parentid"
+												select="parent::rdf:Description/@rdf:about"/>
+												<xsl:attribute
+												name="value"
+												select="text()"/>
+												</xsl:copy>
 												</xsl:for-each>
 											</xsl:for-each>
 										</xsl:variable>
-										<xsl:for-each select="$list">
-											<xsl:sort select="@value"/>
-											<a href="{@parentid}">
-												<xsl:if test='@xml:lang'>
-													<xsl:copy-of select="@xml:lang"/>
+										<xsl:for-each
+											select="$list">
+											<xsl:sort
+												select="@value"/>
+											<a
+												href="{@parentid}">
+												<xsl:if
+												test="@xml:lang">
+												<xsl:copy-of
+												select="@xml:lang"/>
 												</xsl:if>
-												<xsl:value-of select="@value"/>
+												<xsl:value-of
+												select="@value"/>
 											</a>
 										</xsl:for-each>
 									</div>
@@ -454,8 +798,9 @@
 						</div>
 					</xsl:if>
 				</div>
-				<div id="footer">
-					<div>
+				<div
+					id="footer">
+					<!--<div>
 						<span class="copyright">
 							<span>© 2014</span>
 							<a class="proxml" href="http://www.proxml.be"><span>ProXML</span></a>
@@ -465,11 +810,11 @@
 							<a class="netkernel" href="http://www.1060research.com"><span>NetKernel</span></a>
 							<a class="stardog" href="http://stardog.com"><span>Stardog</span></a>
 						</span>
-					</div>
+					</div>-->
 				</div>
-				<script type="text/javascript" src="/lib/jquery/jquery-1.11.0.min.js"></script>
-				<script type="text/javascript" src="/lib/jquery/jquery.cookie.js"></script>
-				<script type="text/javascript" src="/js/kbodata.js"></script>
+				<script type="text/javascript" src="/lib/jquery/jquery-1.11.0.min.js"/>
+				<script type="text/javascript" src="/lib/jquery/jquery.cookie.js"/>
+				<script type="text/javascript" src="/js/kbodata.js"/>
 			</body>
 		</html>
 	</xsl:template>

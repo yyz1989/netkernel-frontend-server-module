@@ -136,14 +136,9 @@ else {
 	freemarkerrequest.setRepresentationClass(String.class);
 	String vQuery = (String)aContext.issueRequest(freemarkerrequest);
 
-	INKFRequest sparqlrequest = aContext.createRequest("active:httpPost");
-	HDSBuilder body = new HDSBuilder();
-	body.pushNode("query", vQuery);
-	sparqlrequest.addArgumentByValue("nvp", body.getRoot());
-	sparqlrequest.addArgument("url", "http://localhost:8083/module/sparql/query");
-	HDSBuilder newHeaders = new HDSBuilder();
-	newHeaders.addNode("Accept", "application/rdf+xml");
-	sparqlrequest.addArgumentByValue("headers", newHeaders.getRoot());
+	INKFRequest sparqlrequest = aContext.createRequest("active:sparqlQuery");
+	sparqlrequest.addArgumentByValue("query", vQuery);
+	sparqlrequest.addArgumentByValue("accept", "application/rdf+xml");
 	vSparqlResult = aContext.issueRequest(sparqlrequest);
 	
 	aContext.sink("pds:/" +aOwner + "_" + aID, vSparqlResult);
