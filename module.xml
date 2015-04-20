@@ -130,6 +130,24 @@
 								<identifier>res:/resources/html/kbo_linked_data_info.html</identifier>
 							</request>
 						</endpoint>
+                                                <endpoint>
+                                                  <meta>
+                                                    <rest>
+						      <simple>fragments</simple>
+						      <method>GET</method>
+						      <Etag>MD5</Etag>
+						      <compress/>
+						    </rest>
+						  </meta>
+						  <grammar>
+						    <active>
+						      <identifier>active:kbodatafragmentsrestoverlay</identifier>
+						    </active>
+						  </grammar>
+						  <request>
+						    <identifier>active:kbodatafragments</identifier>
+						  </request>
+						</endpoint>
 						<endpoint>
 							<meta>
 								<rest>

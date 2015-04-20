@@ -19,8 +19,12 @@
 	xmlns:nk="http://1060.org"
 	xmlns:pt="http://www.proxml.be/xpath/functions/" 
 	xmlns:dcterms="http://purl.org/dc/terms/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/" 
+        xmlns:dcat="http://www.w3.org/ns/dcat#" 
+        xmlns:cc="http://creativecommons.org/ns#" 
+        xmlns:pav="http://purl.org/pav/"
 	xmlns:hydra="http://www.w3.org/ns/hydra/core#"
-	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dcterms pt hydra"
+	exclude-result-prefixes="foaf kbo locn org oslo owl rdf rdfs rov schema skos vcard xsd xsl void prov nk dcterms pt hydra dcat cc pav"
 	version="2.0">
 	<xsl:output indent="yes" method="xhtml" encoding="UTF-8"/>
 	<xsl:param name="url" nk:class="java.lang.String" />
@@ -30,7 +34,7 @@
 		<html>
 			<head>
 				<title>
-					<xsl:value-of select="concat('KBO:', 'Fragment Server')"/>
+					<xsl:value-of select="concat('LOD VL:', 'Fragment Server')"/>
 				</title>
 				<meta name="viewport"
 					content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
@@ -45,14 +49,14 @@
 				<div id="header">
 					<div id="logo">
 						<a href="/">
-							<span>KBO DATA</span>
+							<span>LOD VL</span>
 						</a>
 					</div>
 				</div>
 				<div id="content">
 					<div class="export-options">
 					</div>
-					<h1><span>KBO fragment server</span></h1>
+					<h1><span>LOD VL fragment server</span></h1>
 					<div id="fragment-nav">
 						<xsl:variable name="previous">
 							<xsl:value-of select="rdf:RDF/rdf:Description/hydra:previousPage/@rdf:resource"/>
