@@ -574,7 +574,7 @@
 			</config>
 		</literal>
 		
-		<literal type="string" uri="kbodata:dataset">http://data.kbodata.be/dataset/kbo#id</literal>
+		<literal type="string" uri="lodvl:dataset">http://id.vlaanderen.be/dataset/dcat-vl#id</literal>
                 <literal type="string" uri="kbodata:mimetypes-keywordsearch-allowed">text/html,application/sparql-results+json,application/sparql-results+xml</literal>
                 <literal type="string" uri="kbodata:mimetypes-keywordsearch-default">application/sparql-results+xml</literal>
 		

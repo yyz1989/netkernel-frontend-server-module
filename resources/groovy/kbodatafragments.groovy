@@ -34,7 +34,6 @@ String vPredicate = aContext.source("httpRequest:/param/predicate", String.class
 String vObject = aContext.source("httpRequest:/param/object", String.class);
 String vLimit = aContext.source("httpRequest:/param/limit", String.class);
 String vOffset = aContext.source("httpRequest:/param/offset", String.class);
-String vURL = aContext.source("httpRequest:/url", String.class);
 String vQuery = aContext.source("httpRequest:/query", String.class);
 
 String aExtension = null;
@@ -65,8 +64,10 @@ catch (Exception e) {
 }
 
 String vIdentity = "";
-INKFRequest fragmentsrequest = aContext.createRequest("active:fragments");
-fragmentsrequest.addArgument("database", "kbodata:database");
+INKFRequest fragmentsrequest = aContext.createRequest("active:sparqlQuery");
+fragmentsrequest.addArgumentByValue("query", vQuery);
+fragmentsrequest.addArgumentByValue("accept", "application/rdf+xml");
+
 if (vSubject != null) {
 	fragmentsrequest.addArgumentByValue("subject", vSubject);
 	vIdentity = vIdentity + "s=" + vSubject + "-";
@@ -87,15 +88,10 @@ if (vOffset != null) {
 	fragmentsrequest.addArgumentByValue("offset", vOffset);
 	vIdentity = vIdentity + "f=" + vOffset + "-";
 }
-if (vURL != null) {
-	fragmentsrequest.addArgumentByValue("url", vURL);
-}
 if (vQuery != null) {
 	fragmentsrequest.addArgumentByValue("query", vQuery);
 }
-fragmentsrequest.addArgument("dataset", "kbodata:dataset");
-fragmentsrequest.addArgument("expiry", "kbodata:expiry");
-fragmentsrequest.addArgument("credentials", "kbodata:credentials");
+fragmentsrequest.addArgumentByValue("dataset", "lodvl:dataset");
 fragmentsrequest.addArgumentByValue("accept", "application/rdf+xml");
 
 INKFRequest md5request = aContext.createRequest("active:md5");
@@ -163,7 +159,7 @@ if (aExtension.equals("html")) {
 	INKFRequest xsltrequest = aContext.createRequest("active:xslt2");
 	xsltrequest.addArgumentByValue("operand", vRBS);
 	xsltrequest.addArgumentByValue("url", vURL);
-	xsltrequest.addArgument("dataset", "kbodata:dataset");
+	xsltrequest.addArgument("dataset", "lodvl:dataset");
 	xsltrequest.addArgument("operator", "res:/resources/xsl/kbofragments.xsl");
 	Object vHTML = aContext.issueRequest(xsltrequest);
 	
