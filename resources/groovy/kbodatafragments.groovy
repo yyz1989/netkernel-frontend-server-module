@@ -64,7 +64,7 @@ catch (Exception e) {
 }
 
 String vIdentity = "";
-INKFRequest fragmentsrequest = aContext.createRequest("active:sparqlQuery");
+INKFRequest fragmentsrequest = aContext.createRequest("active:fragmentsQuery");
 fragmentsrequest.addArgumentByValue("query", vQuery);
 fragmentsrequest.addArgumentByValue("accept", "application/rdf+xml");
 

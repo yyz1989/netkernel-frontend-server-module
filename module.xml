@@ -134,7 +134,6 @@
                                                   <meta>
                                                     <rest>
 						      <simple>fragments</simple>
-						      <method>GET</method>
 						      <Etag>MD5</Etag>
 						      <compress/>
 						    </rest>
