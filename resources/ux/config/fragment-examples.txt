@@ -1,5 +1,6 @@
 # one entry per line {subject/predicate/object},,{label},,{type}
-<http://www.w3.org/2000/01/rdf-schema#label>,,label,,predicate
-<http://www.w3.org/ns/locn#postCode>,,postcode,,predicate
-<http://data.kbodata.be/address/2_146_795_783#id>,,2_146_795_783,,subject
-"1500",,halle,,object
+<http://www.w3.org/2000/01/rdf-schema#label>,,has rdfs:label,,predicate
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>,,is a,,predicate
+<http://www.w3.org/ns/dcat#Dataset>,,dcat:Dataset,,object
+<http://id.vlaanderen.be/dataset/vlaamse_hydrografische_atlas_-_waterlopen%2C_27_mei_2014-#id>,,Vlaamse Hydrografische Atlas - Waterlopen,,subject
+"Unnamed resource",,Unnamed resource,,object
