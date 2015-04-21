@@ -721,7 +721,7 @@
 								name="pointertablerow">
 								<xsl:with-param
 									name="key"
-									select="foaf:page"/>
+									select="foaf:page[not(contains(@rdf:resource,'id.vlaanderen.be'))]"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if
