@@ -524,6 +524,7 @@
 		</fileset>
 
                 <import>
+                  <private/>
                   <uri>urn:be:proxml:module:sparql:services</uri>
                 </import>
 		
@@ -595,25 +596,5 @@
 			<uri>urn:org:netkernel:mod:security</uri>
 		</import>
 		
-		<import>
-			<!-- kbodata literals -->
-			<uri>urn:com:elbeesee:kbodata:stardog</uri>
-			<version-min>1.0.0</version-min>
-		</import>
-		<import>
-			<!-- active:sparql -->
-			<uri>urn:com:elbeesee:triplestore:httpclient:sparql</uri>
-			<version-min>1.6.0</version-min>
-		</import>
-		<import>
-			<!-- active:fragments -->
-			<uri>urn:com:elbeesee:triplestore:httpclient:fragments</uri>
-			<version-min>1.6.0</version-min>
-		</import>
-		<import>
-			<!-- active:reconcile -->
-			<uri>urn:com:elbeesee:triplestore:httpclient:reconcile:larq</uri>
-			<version-min>1.6.0</version-min>
-		</import>
 	</rootspace>
 </module>
