@@ -140,21 +140,27 @@
 							class="objects">
 							<xsl:for-each
 								select="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
-
-								<a
-									href="{../@rdf:about}">
-									<xsl:if
-										test="@xml:lang">
-										<xsl:attribute
-											name="xml:lang">
-											<xsl:value-of
-												select="@xml:lang"/>
-										</xsl:attribute>
-									</xsl:if>
-									<xsl:value-of
-										select="normalize-space(.)"/>
-								</a>
-
+                            <xsl:choose>
+                            	<xsl:when test="contains(@rdf:about,'http://')">
+                            		<a
+                            			href="{../@rdf:about}">
+                            			<xsl:if
+                            				test="@xml:lang">
+                            				<xsl:attribute
+                            					name="xml:lang">
+                            					<xsl:value-of
+                            						select="@xml:lang"/>
+                            				</xsl:attribute>
+                            			</xsl:if>
+                            			<xsl:value-of
+                            				select="normalize-space(.)"/>
+                            		</a>
+                            	</xsl:when>
+                            	<xsl:otherwise>
+                            		<xsl:value-of
+                            			select="normalize-space(.)"/>
+                            	</xsl:otherwise>
+                            </xsl:choose>
 							</xsl:for-each>
 						</div>
 					</xsl:when>
@@ -694,7 +700,7 @@
 						<xsl:if
 							test="dcat:accessURL">
 							<xsl:call-template
-								name="multiplepointerrow">
+								name="pointertablerow">
 								<xsl:with-param
 									name="key"
 									select="dcat:accessURL"/>
@@ -703,10 +709,19 @@
 						<xsl:if
 							test="dcat:downloadURL">
 							<xsl:call-template
-								name="multiplepointerrow">
+								name="pointertablerow">
 								<xsl:with-param
 									name="key"
 									select="dcat:downloadURL"/>
+							</xsl:call-template>
+						</xsl:if>
+						<xsl:if
+							test="foaf:page">
+							<xsl:call-template
+								name="pointertablerow">
+								<xsl:with-param
+									name="key"
+									select="foaf:page"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if
@@ -763,7 +778,7 @@
 											<xsl:for-each
 												select="current-group()">
 												<xsl:for-each
-												select="preceding-sibling::rdfs:label">
+												select="following-sibling::rdfs:label">
 												<xsl:copy>
 												<xsl:copy-of
 												select="@*"/>
