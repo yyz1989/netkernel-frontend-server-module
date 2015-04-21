@@ -17,7 +17,7 @@
         fragmentEndpoint: 'http://id.vlaanderen.be/fragments',           // path or url
         // reconciliation
         reconciliationExamples: 'config/reconciliation-examples.txt',   // path or url
-        reconciliationEndpoint: 'http://data.kbodata.be/reconcile'      // path or url
+        reconciliationEndpoint: 'http://id.vlaanderen.be/reconcile'      // path or url
 	};
 	
 })(jQuery);
