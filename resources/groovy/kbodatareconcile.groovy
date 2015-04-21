@@ -90,12 +90,9 @@ else {
 			// not a problem, type is not mandatory
 		}
 
-		INKFRequest reconcilerequest = aContext.createRequest("active:reconcile");
-		reconcilerequest.addArgument("database", "kbodata:database");
-		reconcilerequest.addArgument("expiry", "kbodata:expiry");
-		reconcilerequest.addArgument("credentials", "kbodata:credentials");
-		reconcilerequest.addArgumentByValue("search", vSearch);
-		reconcilerequest.addArgument("baseurl", "kbodata:baseurl");
+		INKFRequest reconcilerequest = aContext.createRequest("active:reconciliationQuery");
+		reconcilerequest.addArgument("endpoint", "sparql:endpoint");
+		reconcilerequest.addArgumentByValue("query", vSearch);
 		if (vLimit != null) {
 			reconcilerequest.addArgumentByValue("limit", vLimit);
 		}
@@ -151,12 +148,9 @@ else {
 				// not a problem, type is not mandatory
 			}
 	
-			INKFRequest reconcilerequest = aContext.createRequest("active:reconcile");
-			reconcilerequest.addArgument("database", "kbodata:database");
-			reconcilerequest.addArgument("expiry", "kbodata:expiry");
-			reconcilerequest.addArgument("credentials", "kbodata:credentials");
-			reconcilerequest.addArgumentByValue("search", vSearch);
-			reconcilerequest.addArgument("baseurl", "kbodata:baseurl");
+			INKFRequest reconcilerequest = aContext.createRequest("active:reconciliationQuery");
+			reconcilerequest.addArgument("endpoint", "sparql:endpoint");
+			reconcilerequest.addArgumentByValue("query", vSearch);
 			if (vLimit != null) {
 				reconcilerequest.addArgumentByValue("limit", vLimit);
 			}

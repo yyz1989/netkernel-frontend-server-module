@@ -134,6 +134,7 @@
                                                   <meta>
                                                     <rest>
 						      <simple>fragments</simple>
+                                                      <method>GET,POST</method>
 						      <Etag>MD5</Etag>
 						      <compress/>
 						    </rest>
@@ -151,6 +152,7 @@
 							<meta>
 								<rest>
 									<simple>reconcile</simple>
+                                                                        <method>GET,POST</method>
 									<Etag>MD5</Etag>
 									<compress/>
 								</rest>
@@ -168,6 +170,7 @@
 							<meta>
 								<rest>
 									<simple>keywordsearch</simple>
+                                                                        <method>GET,POST</method>
 									<Etag>MD5</Etag>
 									<compress/>
 								</rest>
@@ -185,7 +188,7 @@
 							<meta>
 								<rest>
 									<simple>sparql</simple>
-									<method>GET</method>
+									<method>GET,POST</method>
 									<Etag>MD5</Etag>
 									<compress/>
 								</rest>
