@@ -461,7 +461,7 @@
 								name="atomictablerow">
 								<xsl:with-param
 									name="key"
-									select="dct:description"/>
+									select="dct:description[1]"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if
@@ -703,7 +703,7 @@
 								name="pointertablerow">
 								<xsl:with-param
 									name="key"
-									select="dcat:accessURL"/>
+									select="dcat:accessURL[1]"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if
@@ -712,7 +712,7 @@
 								name="pointertablerow">
 								<xsl:with-param
 									name="key"
-									select="dcat:downloadURL"/>
+									select="dcat:downloadURL[1]"/>
 							</xsl:call-template>
 						</xsl:if>
 						<xsl:if
