@@ -40,272 +40,11 @@
 		<xsl:sequence
 			select="concat(namespace-uri($q),local-name($q))"/>
 	</xsl:function>
-	<xsl:template
-		name="tablerow">
-		<xsl:param
-			name="key"
-			as="node()"/>
-		<xsl:param
-			name="nace"/>
-		<xsl:choose>
-			<xsl:when
-				test="$key[@rdf:resource]">
-				<xsl:call-template
-					name="pointertablerow">
-					<xsl:with-param
-						name="key"
-						select="$key"/>
-					<xsl:with-param
-						name="nace"
-						select="$nace"/>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:when
-				test="$key[@xml:lang]">
-				<xsl:call-template
-					name="atomiclangrow">
-					<xsl:with-param
-						name="key"
-						select="$key"/>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template
-					name="atomictablerow">
-					<xsl:with-param
-						name="key"
-						select="$key"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	<xsl:template
-		name="atomictablerow">
-		<xsl:param
-			name="key"
-			as="node()"/>
-		<div
-			class="predicate">
-			<a
-				class="label"
-				href="{pt:q2uri($key)}">
-				<xsl:value-of
-					select="local-name($key)"/>
-			</a>
-			<div
-				class="objects">
-				<xsl:for-each
-					select="$key">
-					<p>
-						<xsl:if
-							test="@xml:lang">
-							<xsl:attribute
-								name="xml:lang">
-								<xsl:value-of
-									select="@xml:lang"/>
-							</xsl:attribute>
-						</xsl:if>
-						<xsl:value-of
-							select="normalize-space(.)"/>
-					</p>
-				</xsl:for-each>
-			</div>
-		</div>
-	</xsl:template>
-	<xsl:template
-		name="pointertablerow">
-		<xsl:param
-			name="key"
-			as="node()"/>
-		<xsl:param
-			name="nace"/>
-		<div
-			class="predicate">
-			<a
-				class="label"
-				href="{pt:q2uri($key)}">
-				<xsl:value-of
-					select="local-name($key)"/>
-				<!--<xsl:if test="string-length($nace) > 1">
-						<xsl:text> NACE </xsl:text>
-						<xsl:value-of select="$nace"/>
-					</xsl:if>-->
-			</a>
-			<xsl:for-each
-				select="$key">
-				<xsl:choose>
-					<xsl:when
-						test="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
-						<div
-							class="objects">
-							<xsl:for-each
-								select="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
-                            <xsl:choose>
-                            	<xsl:when test="contains(@rdf:about,'http://')">
-                            		<a
-                            			href="{../@rdf:about}">
-                            			<xsl:if
-                            				test="@xml:lang">
-                            				<xsl:attribute
-                            					name="xml:lang">
-                            					<xsl:value-of
-                            						select="@xml:lang"/>
-                            				</xsl:attribute>
-                            			</xsl:if>
-                            			<xsl:value-of
-                            				select="normalize-space(.)"/>
-                            		</a>
-                            	</xsl:when>
-                            	<xsl:otherwise>
-                            		<xsl:value-of
-                            			select="normalize-space(.)"/>
-                            	</xsl:otherwise>
-                            </xsl:choose>
-							</xsl:for-each>
-						</div>
-					</xsl:when>
-					<xsl:otherwise>
-						<div
-							class="objects">
-							<a
-								href="{@rdf:resource}">
-								<xsl:value-of
-									select="@rdf:resource"/>
-							</a>
-						</div>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:for-each>
-		</div>
-	</xsl:template>
-	<xsl:template
-		name="atomiclangrow">
-		<xsl:param
-			name="key"
-			as="node()"/>
-		<div
-			class="predicate">
-			<a
-				class="label"
-				href="{pt:q2uri($key)}">
-				<xsl:value-of
-					select="local-name($key)"/>
-			</a>
-			<div
-				class="objects">
-				<p>
-					<xsl:if
-						test="$key[@xml:lang]">
-						<xsl:attribute
-							name="xml:lang">
-							<xsl:value-of
-								select="$key/@xml:lang"/>
-						</xsl:attribute>
-					</xsl:if>
-					<xsl:value-of
-						select="normalize-space($key)"/>
-				</p>
-				<xsl:for-each
-					select="$key/following-sibling::*[name(.)=name($key)]">
-					<p>
-						<xsl:if
-							test="@xml:lang">
-							<xsl:attribute
-								name="xml:lang">
-								<xsl:value-of
-									select="@xml:lang"/>
-							</xsl:attribute>
-						</xsl:if>
-						<xsl:value-of
-							select="normalize-space(.)"/>
-					</p>
-				</xsl:for-each>
-			</div>
-
-		</div>
-	</xsl:template>
-	<xsl:template
-		name="multiplevaluerow">
-		<xsl:param
-			name="key"
-			as="node()+"/>
-		<div
-			class="predicate">
-			<a
-				class="label"
-				href="{pt:q2uri($key[1])}">
-				<xsl:value-of
-					select="local-name($key[1])"/>
-			</a>
-			<div
-				class="objects">
-				<xsl:for-each
-					select="$key">
-					<p>
-						<xsl:if
-							test="@xml:lang">
-							<xsl:attribute
-								name="xml:lang">
-								<xsl:value-of
-									select="@xml:lang"/>
-							</xsl:attribute>
-						</xsl:if>
-						<xsl:value-of
-							select="normalize-space(.)"/>
-					</p>
-				</xsl:for-each>
-			</div>
-		</div>
-	</xsl:template>
-	<xsl:template
-		name="multiplepointerrow">
-		<xsl:param
-			name="key"
-			as="node()+"/>
-		<div
-			class="predicate">
-			<a
-				class="label"
-				href="{pt:q2uri($key[1])}">
-				<xsl:value-of
-					select="local-name($key[1])"/>
-			</a>
-			<div
-				class="objects">
-				<!--<xsl:for-each select="$key">
-					<xsl:for-each
-						select="//rdf:Description[@rdf:about = current()/@rdf:resource]/rdfs:label">
-						<a href="{../@rdf:about}">
-							<xsl:if test="@xml:lang">
-								<xsl:attribute name="xml:lang">
-									<xsl:value-of select="@xml:lang"/>
-								</xsl:attribute>
-							</xsl:if>
-							<xsl:value-of select="normalize-space(.)"/>
-						</a>
-					</xsl:for-each>
-				</xsl:for-each>-->
-				<xsl:for-each
-					select="//rdf:Description[@rdf:about = $key/@rdf:resource]/rdfs:label">
-					<xsl:sort
-						select="."/>
-					<a
-						href="{../@rdf:about}">
-						<xsl:if
-							test="@xml:lang">
-							<xsl:attribute
-								name="xml:lang">
-								<xsl:value-of
-									select="@xml:lang"/>
-							</xsl:attribute>
-						</xsl:if>
-						<xsl:value-of
-							select="normalize-space(.)"/>
-					</a>
-				</xsl:for-each>
-			</div>
-		</div>
-	</xsl:template>
+	<xsl:variable name="titles" as="element()+">
+			<rdfs:label/>
+			<skos:preflabel/>
+			<dct:title/>
+	</xsl:variable>
 	<xsl:template
 		match="/">
 		<xsl:apply-templates
@@ -330,11 +69,11 @@
 						<xsl:when
 							test="org:identifier">
 							<xsl:value-of
-								select="concat('Vlaanderen:', org:identifier)"/>
+								select="concat('Vlaanderen: ', org:identifier)"/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of
-								select="concat('Vlaanderen:', rdfs:label[1])"/>
+								select="concat('Vlaanderen: ', rdfs:label[1])"/>
 						</xsl:otherwise>
 					</xsl:choose>
 
@@ -398,11 +137,28 @@
 							href="{$docid}.rdf">XML</a>
 					</div>
 					<h1>
+						<xsl:variable name="title">
+							<xsl:choose>
+								<xsl:when test="rdfs:label">
+									<xsl:value-of select="rdfs:label"/>
+								</xsl:when>
+								<xsl:otherwise>
+								<xsl:choose>
+									<xsl:when test="skos:prefLabel">
+										<xsl:value-of select="skos:prefLabel"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="dct:title"/>
+									</xsl:otherwise>
+								</xsl:choose>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:variable>
 						<xsl:choose>
 							<xsl:when
-								test="rdfs:label[@xml:lang]">
+								test="$title[@xml:lang]">
 								<xsl:for-each
-									select="rdfs:label[@xml:lang]">
+									select="$title[@xml:lang]">
 									<span
 										xml:lang="{@xml:lang}">
 										<xsl:value-of
@@ -412,345 +168,125 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of
-									select="rdfs:label"/>
+									select="$title"/>
 							</xsl:otherwise>
 						</xsl:choose>
 					</h1>
 					<div
 						class="properties">
-						<xsl:if
-							test="skos:prefLabel">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="skos:prefLabel[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="skos:altLabel">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="skos:altLabel[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						
-						<xsl:if
-							test="not(exists(dct:title)) and rdfs:label">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="rdfs:label[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:title">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:title[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:description">
-							<xsl:call-template
-								name="atomictablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:description[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:identifier">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:identifier"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dc:creator">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dc:creator"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:modified">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:modified"/>
-							</xsl:call-template>
-						</xsl:if>
-						
-						
-						<xsl:if
-							test="dcat:keyword">
-							<xsl:call-template
-								name="multiplevaluerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:keyword"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dcat:theme">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:theme"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:license">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:license"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dc:format">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dc:format"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="schema:email">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="schema:email"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="schema:faxNumber">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="schema:faxNumber"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="schema:telephone">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="schema:telephone"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="locn:fullAddress">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="locn:fullAddress"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="pav:hasEarlierVersion">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="pav:hasEarlierVersion"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="pav:version">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="pav:version"/>
-							</xsl:call-template>
-						</xsl:if>
+						<xsl:for-each-group
+							select="/descendant::rdf:Description[rdf:type]/rdfs:label|skos:prefLabel|dct:title"
+							group-by="node-name(.)">
+							<xsl:sort select="local-name(.)"/>
+							<div
+								class="predicate">
+								<a
+									class="label"
+									href="{concat(namespace-uri(.),local-name(.))}">
+									<xsl:value-of
+										select="current-grouping-key()"/>
+								</a>
+								<div
+									class="objects">
+									<xsl:for-each
+										select="current-group()">
+										<xsl:sort/>
+										<span>
+											
+											<xsl:if test="@xml:lang">
+												<xsl:attribute name="xml:lang">
+													<xsl:value-of select="@xml:lang"/>
+												</xsl:attribute>
+											</xsl:if>
+											
+											<xsl:value-of select="."/>
+										</span>		
+									</xsl:for-each>
+								</div>
+							</div>
+						</xsl:for-each-group>	
+					</div>
+					<div
+						class="properties">
+						<xsl:for-each-group
+							select="/descendant::rdf:Description[rdf:type]/*[not(@rdf:resource)] except (dct:title|rdfs:label|skos:prefLabel)"
+							group-by="node-name(.)">
+							<xsl:sort select="local-name(.)"/>
+							<div
+								class="predicate">
+								<a
+									class="label"
+									href="{concat(namespace-uri(.),local-name(.))}">
+									<xsl:value-of
+										select="current-grouping-key()"/>
+								</a>
+								<div
+									class="objects">
+									<xsl:for-each
+										select="current-group()">
+										<xsl:sort/>
+										<span>
+					
+											<xsl:if test="@xml:lang">
+												<xsl:attribute name="xml:lang">
+													<xsl:value-of select="@xml:lang"/>
+												</xsl:attribute>
+											</xsl:if>
+								
+													<xsl:value-of select="."/>
+										</span>		
+									</xsl:for-each>
+								</div>
+							</div>
+						</xsl:for-each-group>	
 					</div>
 					<div
 						class="links outbound">
-						<xsl:if
-							test="rdf:type">
-							<xsl:for-each
-								select="rdf:type">
-								<xsl:call-template
-									name="tablerow">
-									<xsl:with-param
-										name="key"
-										select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
-						<xsl:if
-							test="skos:hasTopConcept">
-							<xsl:call-template
-								name="multiplepointerrow">
-								<xsl:with-param
-									name="key"
-									select="skos:hasTopConcept"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="skos:inScheme">
-							<xsl:for-each
-								select="skos:inScheme">
-								<xsl:call-template
-									name="tablerow">
-									<xsl:with-param
-										name="key"
-										select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
-						<xsl:if
-							test="skos:broader">
-							<xsl:for-each
-								select="skos:broader">
-								<xsl:call-template
-									name="tablerow">
-									<xsl:with-param
-										name="key"
-										select="."/>
-								</xsl:call-template>
-							</xsl:for-each>
-						</xsl:if>
-						
-						<xsl:if
-							test="dcat:distribution">
-							<xsl:call-template
-								name="multiplepointerrow">
-								<xsl:with-param
-									name="key"
-									select="dcat:distribution"/>
-							</xsl:call-template>
-						</xsl:if>
-						
-						<xsl:if
-							test="dct:publisher">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:publisher"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:subject">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:subject"/>
-							</xsl:call-template>
-						</xsl:if>
-
-						<xsl:if
-							test="owl:sameAs">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="owl:sameAs"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dcat:landingPage">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:landingPage"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:spatial">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:spatial"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dct:temporal">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dct:temporal"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dcat:accessURL">
-							<xsl:call-template
-								name="pointertablerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:accessURL[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dcat:downloadURL">
-							<xsl:call-template
-								name="pointertablerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:downloadURL[1]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="foaf:page[not(contains(@rdf:resource,'id.vlaanderen.be'))]">
-							<xsl:call-template
-								name="pointertablerow">
-								<xsl:with-param
-									name="key"
-									select="foaf:page[not(contains(@rdf:resource,'id.vlaanderen.be'))]"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="dcat:mediaType">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="dcat:mediaType"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="vcard:hasEmail">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="vcard:hasEmail"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if
-							test="cc:legalcode">
-							<xsl:call-template
-								name="tablerow">
-								<xsl:with-param
-									name="key"
-									select="cc:legalcode"/>
-							</xsl:call-template>
-						</xsl:if>
+						<xsl:for-each-group
+							select="/descendant::rdf:Description[rdf:type]/*[@rdf:resource] except rdfs:isDefinedBy"
+							group-by="node-name(.)">
+							<xsl:sort select="local-name(.)"/>
+							<div
+								class="predicate">
+								<a
+									class="label"
+									href="{concat(namespace-uri(.),local-name(.))}">
+									<xsl:value-of
+										select="current-grouping-key()"/>
+								</a>
+								<div
+									class="objects">
+									<xsl:for-each
+										select="current-group()">
+										<xsl:sort/>
+										<xsl:choose>
+											<xsl:when test="not(contains(@rdf:resource,'bnode'))">
+												<a href='{@rdf:resource}'>
+													<xsl:choose>
+														<xsl:when test="/descendant::rdf:Description[not(rdf:type)][@rdf:about = current()/@rdf:resource][rdfs:label]">
+															<xsl:value-of select="/descendant::rdf:Description[not(rdf:type)][@rdf:about = current()/@rdf:resource]/rdfs:label"/>
+														</xsl:when>
+														<xsl:otherwise><xsl:value-of
+															select="@rdf:resource"/></xsl:otherwise>
+													</xsl:choose>
+												</a>	
+											</xsl:when>
+											<xsl:otherwise>
+												
+												<xsl:choose>
+													<xsl:when test="/descendant::rdf:Description[not(rdf:type)][@rdf:about = current()/@rdf:resource][rdfs:label]">
+														<xsl:value-of select="/descendant::rdf:Description[not(rdf:type)][@rdf:about = current()/@rdf:resource]/rdfs:label"/>
+													</xsl:when>
+													<xsl:otherwise><xsl:value-of
+														select="@rdf:resource"/></xsl:otherwise>
+												</xsl:choose>
+												
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:for-each>
+								</div>
+							</div>
+						</xsl:for-each-group>
 					</div>
 					<xsl:if
 						test="/descendant::rdf:Description[not(rdf:type) and *[@rdf:resource]]">
@@ -796,7 +332,7 @@
 											select="$list">
 											<xsl:sort
 												select="@value"/>
-											<a
+											<p><a
 												href="{@parentid}">
 												<xsl:if
 												test="@xml:lang">
@@ -805,7 +341,7 @@
 												</xsl:if>
 												<xsl:value-of
 												select="@value"/>
-											</a>
+											</a></p>
 										</xsl:for-each>
 									</div>
 								</div>
