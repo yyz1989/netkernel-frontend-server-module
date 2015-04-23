@@ -176,7 +176,7 @@
 						class="properties">
 						<xsl:for-each-group
 							select="/descendant::rdf:Description[rdf:type]/rdfs:label|skos:prefLabel|dct:title"
-							group-by="node-name(.)">
+							group-by="local-name(.)">
 							<xsl:sort select="local-name(.)"/>
 							<div
 								class="predicate">
@@ -205,12 +205,9 @@
 								</div>
 							</div>
 						</xsl:for-each-group>	
-					</div>
-					<div
-						class="properties">
 						<xsl:for-each-group
 							select="/descendant::rdf:Description[rdf:type]/*[not(@rdf:resource)] except (dct:title|rdfs:label|skos:prefLabel)"
-							group-by="node-name(.)">
+							group-by="local-name(.)">
 							<xsl:sort select="local-name(.)"/>
 							<div
 								class="predicate">
@@ -244,7 +241,7 @@
 						class="links outbound">
 						<xsl:for-each-group
 							select="/descendant::rdf:Description[rdf:type]/*[@rdf:resource] except rdfs:isDefinedBy"
-							group-by="node-name(.)">
+							group-by="local-name(.)">
 							<xsl:sort select="local-name(.)"/>
 							<div
 								class="predicate">
@@ -295,8 +292,8 @@
 						<div
 							class="links inbound">
 							<xsl:for-each-group
-								select="/descendant::rdf:Description[not(rdf:type)]/*[@rdf:resource and namespace-uri() != 'http://purl.org/dc/terms/']"
-								group-by="node-name(.)">
+								select="/descendant::rdf:Description[not(rdf:type) and not(@rdf:nodeID)]/*[@rdf:resource]"
+								group-by="local-name(.)">
 								<!--<xsl:sort select="current-grouping-key()"/>-->
 								<div
 									class="predicate">
@@ -332,7 +329,7 @@
 											select="$list">
 											<xsl:sort
 												select="@value"/>
-											<p><a
+											<a
 												href="{@parentid}">
 												<xsl:if
 												test="@xml:lang">
@@ -341,7 +338,7 @@
 												</xsl:if>
 												<xsl:value-of
 												select="@value"/>
-											</a></p>
+											</a>
 										</xsl:for-each>
 									</div>
 								</div>
