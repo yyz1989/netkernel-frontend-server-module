@@ -32,7 +32,8 @@ WHERE {
  {?s ?ip <http://id.vlaanderen.be/${owner}/${id}#id>.
   OPTIONAL {?s rdfs:label ?irlabel}
   OPTIONAL {?s skos:prefLabel ?iplabel}
-  BIND (COALESCE(?iplabel, ?irlabel) AS ?ilabel)
+  OPTIONAL {?s dct:title ?title}
+  BIND (COALESCE(?irlabel, ?iplabel, ?title) AS ?ilabel)
  }
  UNION
  {<http://id.vlaanderen.be/${owner}/${id}#id> dcat:contactPoint ?cp.
